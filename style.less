@@ -1,0 +1,96 @@
+body {
+	overflow-x: hidden;
+}
+#map {
+	height: 500px;
+	//border: 1px solid black;
+    background: url(../img/map.png) no-repeat center center scroll; 
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
+	 
+ 	border-radius: 6px;
+}
+#intro {
+	padding: 8px;
+}
+#topic-page .topicstory {
+	margin: 6px !important; 
+}
+.topicstory {
+	
+	margin-top: 12px;
+	border: 1px solid #CCC;
+	border-radius: 6px;
+	
+	p {
+		padding: 12px;
+	}
+	img {
+		width: 100%;
+		height: auto
+	}
+	
+	h3 {
+		text-align: center;
+	}
+	
+	.story-date {
+		font-size: 0.75em;
+		display: block;
+		text-align: center;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// Isotope
+
+.isotope,
+.isotope .isotope-item {
+  /* change duration value to whatever you like */
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
