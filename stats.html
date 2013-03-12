@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Shine in Peace | Topics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- ><link href="css/bootstrap-responsive.css" rel="stylesheet"> -->
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+
+  </head>
+
+  <body>
+      <pre id="container" style="width: 50%; margin: auto; word-wrap: break-word;">
+          
+      </pre>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+	
+	<script src="js/jquery.isotope.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/moment.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="js/underscore.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+
+	<script type="text/javascript" charset="utf-8">
+    
+    
+    //https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdHZoYWM5UklxaXI4bEpqS3cta1hid1E&output=html
+    
+d3.csv('https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdHZoYWM5UklxaXI4bEpqS3cta1hid1E&output=csv', function(error, _json){
+        
+      console.log(_json[0])
+      
+      var page = $("#container")
+      
+      var count = {}
+      
+      count.shootings = _json.length
+      
+      count.beat = _.countBy(_json, function(d){ return d.BEAT })
+      count.desc = _.countBy(_json, function(d){ return d.DESCRIPTION })
+      count.homicides = _.countBy(_json, function(d){ return d.HomicideTag })
+      count.injuries = _.countBy(_json, function(d){ return d.ShootInjuryTag })
+      count.hourBreakdown = _.countBy(_json, function(d){ return moment(d.TIME, "h:m A" ).format("HH"); })
+      count.dayBreakdown = _.countBy(_json, function(d){  return moment(d.DATE + " " + d.Year, "MMMM DD YYYY" ).format("ddd"); })
+      
+      
+      
+      
+      
+      
+      console.log("COUNT!", count)
+      
+      page.text(JSON.stringify(count))
+      
+      
+    })
+    
+	</script>
+  </body>
+</html>

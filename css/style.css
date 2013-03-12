@@ -3,12 +3,23 @@ body {
 }
 #map {
   height: 500px;
-  background: url(../img/map.png) no-repeat center center scroll;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  /*
+    background: url(../img/map.png) no-repeat center center scroll; 
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
+     */
+
   border-radius: 6px;
+}
+#map #loading {
+  font-size: 72px;
+  z-index: 999;
+  position: absolute;
+  width: 40%;
+  left: 50%;
+  margin-left: -20%;
 }
 #intro {
   padding: 8px;
@@ -35,6 +46,82 @@ body {
   font-size: 0.75em;
   display: block;
   text-align: center;
+}
+#behind-left,
+#behind-right {
+  font-size: 0.8em !important;
+  width: 24%;
+  position: absolute;
+  top: 0;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 2%;
+  padding-top: .1em;
+  background-color: #d6d6d6;
+  background-image: -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 200, from(#ffffff), to(#d6d6d6));
+  background-image: -webkit-radial-gradient(50% 100%, #d6d6d6, #ffffff);
+  background-image: -moz-radial-gradient(50% 100%, #d6d6d6, #ffffff);
+  background-image: -o-radial-gradient(50% 100%, #d6d6d6, #ffffff);
+  background-image: -ms-radial-gradient(50% 100%, #d6d6d6, #ffffff);
+  background-image: radial-gradient(50% 100%, #d6d6d6, #ffffff);
+}
+#behind-left {
+  left: -29%;
+}
+#behind-right {
+  right: -29%;
+}
+#behind-right #map-incidents li {
+  margin-top: .5em;
+}
+#behind-right #map-incidents li a {
+  border: 1px solid #CCC;
+  background-color: #fefdff;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fefdff), to(#dedede));
+  background-image: -webkit-linear-gradient(top, #fefdff, #dedede);
+  background-image: -moz-linear-gradient(top, #fefdff, #dedede);
+  background-image: -o-linear-gradient(top, #fefdff, #dedede);
+  background-image: -ms-linear-gradient(top, #fefdff, #dedede);
+  background-image: linear-gradient(top, #fefdff, #dedede);
+  filter: progid:dximagetransform.microsoft.gradient(GradientType=0, StartColorStr='#fefdff', EndColorStr='#dedede');
+}
+#behind-right #map-incidents li a:hover {
+  border: 1px solid #999;
+}
+#data-container {
+  padding: 2px;
+  background-color: white !important;
+  width: 60%;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 0px 12px 0px rgba(25, 25, 25, 0.15);
+  box-shadow: 0px 0px 12px 0px rgba(25, 25, 25, 0.15);
+}
+#category-list {
+  padding: 0;
+  margin: 0;
+}
+#category-list li {
+  opacity: 0.45;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 0.8em;
+  cursor: pointer;
+}
+#category-list li img {
+  border-radius: 4px;
+}
+#category-list li:hover {
+  opacity: 0.8;
+}
+#category-list .active {
+  opacity: 1;
+}
+#category-list .active img {
+  border: 2px solid #999;
+  margin-left: -1px;
 }
 .isotope,
 .isotope .isotope-item {
