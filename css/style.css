@@ -2,7 +2,7 @@ body {
   overflow-x: hidden;
 }
 #map {
-  height: 500px;
+  height: 600px;
   /*
     background: url(../img/map.png) no-repeat center center scroll; 
      -webkit-background-size: cover;

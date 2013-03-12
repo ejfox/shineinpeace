@@ -19,6 +19,7 @@
 	<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
 	<script src="js/tabletop.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/ICanHaz.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/moment.min.js" type="text/javascript" charset="utf-8"></script>
 	
     <style type="text/css">
       body {
@@ -77,8 +78,8 @@
                 
                 <script id="homicidePop" type="text/html">
                 <h2>Homicide</h2>
+                <div><strong class="victim-names">{{victims}}</strong> killed {{date}} at {{time}}</div>
                 <div>Number of reported victims: {{noofvictims}}</div>
-                <div>{{victims}} killed on {{date}} at {{time}}</div>
                 <div>{{address}}</div>
                 <div class="detailed-description">
                     I am a detailed description of the event. Track through OPD with RD# {{rdNumber}}
@@ -258,6 +259,10 @@
         	    // data comes through as a simple array since simpleSheet is turned on
         	    //alert("Successfully processed " + data.length + " rows!")
         	    for (i=0 ; i < data.length ; i++){
+                    
+                    //var dateFormat = moment(data[i].date, "D/M/YYYY" ).format("MMMM Do");                
+                    var dateFormat = moment(data[i].date, "M/D/YYYY" ).fromNow(false)
+                    
                     insertMapInfo = {
                         lat: parseFloat(data[i].latitude)
                         ,lng: parseFloat(data[i].longitude)
@@ -267,9 +272,9 @@
                         ,shootnoinjurytag: data[i].shootnoinjurytag
                         ,shoottag: data[i].shoottag
                         ,address: data[i].address
-                        ,date: data[i].date
+                        ,date: dateFormat
                         ,time: data[i].time
-                        ,rd: data[i].rd
+                        ,rdNumber: data[i].rd
                         ,statute: data[i].statute
                         ,victims: data[i].victims
                         ,noofvictims: data[i].noofvictims
