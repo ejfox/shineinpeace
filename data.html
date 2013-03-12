@@ -206,12 +206,12 @@
 		
         	}
 	        
-            function mapNewPoint(pointData, i){
+            function mapNewPoint(pointData){
                 
-                var homicidePop = ich.homicidePop(pointData[i], true);
-                var injuryPop = ich.injuryPop(pointData[i], true);
-                var noInjuryPop = ich.noInjuryPop(pointData[i], true);
-                var shootPop = ich.shootPop(pointData[i], true);  
+                var homicidePop = ich.homicidePop(pointData, true);
+                var injuryPop = ich.injuryPop(pointData, true);
+                var noInjuryPop = ich.noInjuryPop(pointData, true);
+                var shootPop = ich.shootPop(pointData, true);  
                 
     			//place points
     			if (pointData.homicidetag == "TRUE"){                        
@@ -222,7 +222,7 @@
                         fillOpacity: 0.8
                         
                     }).addTo(map)
-                                    
+                    
                     homicidePoint.bindPopup(homicidePop)                        
     			}
     			else if (pointData.shootinjurytag == "TRUE") {
