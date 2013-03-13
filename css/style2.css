@@ -1,0 +1,191 @@
+html {
+  height: 100%;
+  height: 100%;
+}
+body {
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+#section1 {
+  width: 100%;
+  height: 90%;
+}
+#section2 {
+  padding: 1em;
+  height: 100%;
+}
+#map {
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  /*
+    background: url(../img/map.png) no-repeat center center scroll; 
+     -webkit-background-size: cover;
+     -moz-background-size: cover;
+     -o-background-size: cover;
+     background-size: cover;
+     */
+
+  border-radius: 6px;
+}
+#map #loading {
+  font-size: 72px;
+  z-index: 999;
+  position: absolute;
+  width: 40%;
+  left: 50%;
+  margin-left: -20%;
+}
+#intro {
+  padding: 8px;
+}
+#topic-page .topicstory {
+  margin: 6px !important;
+}
+.topicstory {
+  margin-top: 12px;
+  border: 1px solid #CCC;
+  border-radius: 6px;
+}
+.topicstory p {
+  padding: 12px;
+}
+.topicstory img {
+  width: 100%;
+  height: auto;
+}
+.topicstory h3 {
+  text-align: center;
+}
+.topicstory .story-date {
+  font-size: 0.75em;
+  display: block;
+  text-align: center;
+}
+.leaflet-left {
+  left: 17% !important;
+}
+#left-map-menu,
+#right-map-menu {
+  z-index: 999999;
+  font-size: 0.8em !important;
+  width: 12%;
+  position: absolute;
+  top: 12px;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 2%;
+  padding-top: .1em;
+  background-color: #d6d6d6;
+  background-image: -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 200, from(#ffffff), to(#d6d6d6));
+  background-image: -webkit-radial-gradient(50% 100%, #d6d6d6, #ffffff);
+  background-image: -moz-radial-gradient(50% 100%, #d6d6d6, #ffffff);
+  background-image: -o-radial-gradient(50% 100%, #d6d6d6, #ffffff);
+  background-image: -ms-radial-gradient(50% 100%, #d6d6d6, #ffffff);
+  background-image: radial-gradient(50% 100%, #d6d6d6, #ffffff);
+}
+#left-map-menu img,
+#right-map-menu img {
+  width: 100%;
+  height: auto;
+}
+#left-map-menu {
+  left: 6px;
+}
+#right-map-menu {
+  right: 6px;
+}
+#right-map-menu #map-incidents ul {
+  margin: 0;
+  padding: 0;
+}
+#data-container {
+  height: 100%;
+  padding: 0;
+  background-color: white !important;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 6px;
+  /*
+    
+    -webkit-box-shadow: 0px 0px 12px 0px rgba(25,25,25,0.15); 
+            box-shadow: 0px 0px 12px 0px rgba(25,25,25,0.15); 
+            */
+
+}
+#category-list {
+  padding: 0;
+  margin: 0;
+}
+#category-list li {
+  opacity: 0.45;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 0.8em;
+  cursor: pointer;
+}
+#category-list li img {
+  border-radius: 4px;
+}
+#category-list li:hover {
+  opacity: 0.8;
+}
+#category-list .active {
+  opacity: 1;
+}
+#category-list .active img {
+  border: 2px solid #999;
+  margin-left: -1px;
+}
+.leaflet-popup-content {
+  font-size: 0.8em;
+}
+.leaflet-popup-content .victim-address {
+  font-weight: bold;
+  font-style: italic;
+}
+.leaflet-popup-content .detailed-description {
+  display: none;
+}
+.leaflet-popup-content .victim-names {
+  font-weight: bold;
+}
+.isotope,
+.isotope .isotope-item {
+  /* change duration value to whatever you like */
+
+  -webkit-transition-duration: 0.8s;
+  -moz-transition-duration: 0.8s;
+  -ms-transition-duration: 0.8s;
+  -o-transition-duration: 0.8s;
+  transition-duration: 0.8s;
+}
+.isotope {
+  -webkit-transition-property: height, width;
+  -moz-transition-property: height, width;
+  -ms-transition-property: height, width;
+  -o-transition-property: height, width;
+  transition-property: height, width;
+}
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+  -moz-transition-property: -moz-transform, opacity;
+  -ms-transition-property: -ms-transform, opacity;
+  -o-transition-property: -o-transform, opacity;
+  transition-property: transform, opacity;
+}
+/**** disabling Isotope CSS3 transitions ****/
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -ms-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+}

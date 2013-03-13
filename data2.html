@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Shine in Peace</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="css/style2.css" rel="stylesheet">
+    
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+	<!--[if lte IE 8]>
+	     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
+	 <![endif]-->
+	<script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.1"></script>
+	<script src="js/tabletop.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/ICanHaz.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/moment.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/underscore.js" type="text/javascript" charset="utf-8"></script>	
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <!-- ><link href="css/bootstrap-responsive.css" rel="stylesheet"> -->
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+
+
+  </head>
+
+  <body>
+    <div class="container-fluid" id="data-container">
+	    <div id="section1">
+			<div id="map">
+                <h2 id="loading">Loading....</h2>
+                
+                <script id="homicidePop" type="text/html">
+                <h2>Homicide on {{date2}}</h2>
+                <div><strong class="victim-names">{{victims}}</strong> killed {{date}} at {{time}}</div>
+                <div>Reported victims: <span class="number-of-victims">{{noofvictims}}</span></div>
+                <div class="victim-address">{{address}}</div>
+                <div class="detailed-description">
+                    I am a detailed description of the event. Track through OPD with RD# {{rdNumber}}
+                </div>
+                </script>
+                
+                <script id="injuryPop" type="text/html">
+                <h2>Shooting with Injury on {{date2}}</h2>
+                <div>Reported victims: <span class="number-of-victims">{{noofvictims}}</span></div>
+                <div>{{date}} at {{time}}</div>
+                <div class="victim-address">{{address}}</div>
+                <div class="detailed-description">
+                    I am a detailed description of the event. Track through OPD with RD# {{rdNumber}}
+                </div>
+                </script>
+                
+                <script id="noInjuryPop" type="text/html">
+                <h2>Shooting with No Injury on {{date2}}</h2>
+                <div>Reported victims: <span class="number-of-victims">{{noofvictims}}</span></div>
+                <div>{{date}} at {{time}}</div>
+                <div class="victim-address">{{address}}</div>
+                <div class="detailed-description">
+                    I am a detailed description of the event. Track through OPD with RD# {{rdNumber}}
+                </div>
+                </script>
+                
+                <script id="shootPop" type="text/html">
+                <h2>Shooting on {{date2}}</h2>
+                <div>Reported victims: <span class="number-of-victims">{{noofvictims}}</span></div>
+                <div>{{date}} at {{time}}</div>
+                <div class="victim-address">{{address}}</div>
+                <div class="detailed-description">
+                    I am a detailed description of the event. Track through OPD with RD# {{rdNumber}}
+                </div>
+                </script>
+
+			</div>
+		
+        <!-- 
+		<div class="row-fluid">
+			<div class="span3 topicstory">
+				<h3>The Killings</h3>
+				<img src="http://placehold.it/350x250" />
+			</div>
+			<div class="span3 topicstory">
+				<h3>The Trauma</h3>
+				<img src="http://placehold.it/350x250" />
+			</div>
+			<div class="span3 topicstory">
+				<h3>The Solutions</h3>
+				<img src="http://placehold.it/350x250" />
+			</div>
+			<div class="span3 topicstory">
+				<h3>The Data</h3>
+				<img src="http://placehold.it/350x250" />
+			</div>			
+		</div>
+        -->
+        
+        
+        <div id="left-map-menu">
+            <h3>Behind left menu!</h3>
+            <ul id="category-list">
+                <li class="active"><img src="http://placehold.it/350x250" /></li>
+                <li><img src="http://placehold.it/350x250" /></li>
+                <li><img src="http://placehold.it/350x250" /></li>
+                <li><img src="http://placehold.it/350x250" /></li>
+            </ul>
+        </div>
+        
+        <div id="right-map-menu">
+            
+            <div id="map-incidents">
+                <h3>Filter Map</h3>
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href="#">Homicides</a></li>
+                    <li><a href="#">Shootings with injuries</a></li>
+                    <li><a href="#">Shootings with no injuries</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="section2">
+        <h1>Hello, world!</h1>
+    </div>
+        
+
+
+        <footer class="row-fluid span12" >
+        	
+        </footer>			
+
+
+
+
+
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){        
+        
+        $('#category-list li img').click( function(){
+            $('#category-list li').removeClass("active");
+            $(this).parent().addClass("active");
+    
+        })
+    
+        
+        /*    Create the map     */
+    
+        var pointData = [];
+
+        $(document).ready(function($){
+
+                        d3.csv('https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dGNLVEJoWGthSmJvUVgyOG5YeW9ZN2c&single=true&gid=0&output=csv', function(error, _json){
+                            
+            showInfo(_json)                
+            })
+	        
+            function mapNewPoint(pointData){
+                
+                var homicidePop = ich.homicidePop(pointData, true);
+                var injuryPop = ich.injuryPop(pointData, true);
+                var noInjuryPop = ich.noInjuryPop(pointData, true);
+                var shootPop = ich.shootPop(pointData, true);  
+                
+    			//place points
+    			if (pointData.homicidetag == "TRUE"){                        
+                    var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
+                    homicidePoint = new L.circle(pntLatLng, 140, {
+                        color: 'red',
+                        stroke: false,
+                        fillOpacity: 0.8
+                        
+                    }).addTo(map)
+                    
+                    homicidePoint.bindPopup(homicidePop)                        
+    			}
+    			else if (pointData.shootinjurytag == "TRUE") {
+                    var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
+                    homicidePoint = new L.circle(pntLatLng, 100, {
+                        color: 'red',
+                        weight: 1,
+                        fillOpacity: 0.1
+                        
+                    }).addTo(map)
+                                    
+                    homicidePoint.bindPopup(injuryPop)                                  
+    			}
+    			//else if (pointData[5] == "TRUE") {
+    			//	shootNoInjuryPoint = new L.Marker(new L.LatLng(a[0], a[1]), { title: noinjurypop, icon:shootNoInjuryIcon, riseOnHover:true }).bindPopup(noinjurypop).addTo(map); //map points
+    			//}
+    			else if (pointData.shoottag == "TRUE") {                        
+                    var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
+                    homicidePoint = new L.circle(pntLatLng, 80, {
+                        color: 'black',
+                        stroke: false,
+                        fillOpacity: 0.5
+                        
+                    }).addTo(map)
+                                    
+                    homicidePoint.bindPopup(shootPop)                                                
+    			}
+            
+            }
+            
+        	//grab map info and plot
+        	function showInfo(data) {
+                //console.log("DATA", data)
+                
+        	    // data comes through as a simple array since simpleSheet is turned on
+        	    //alert("Successfully processed " + data.length + " rows!")
+        	    _.each(data, function(row){
+                    
+                    //var dateFormat = moment(data[i].date, "D/M/YYYY" ).format("MMMM Do");                
+                    //var dateFormat = moment(row.DATE, "M/D/YYYY" ).fromNow(false)
+                    var dateFormat = moment(row.DATE + " " + row.Year, "MMMM D YYYY" ).fromNow(false)
+                    var dateFormat2 = moment(row.DATE + " " + row.Year, "MMMM D YYYY" ).format("MMM Do")
+                    
+                    
+                    //console.log("ROW>", row)
+                    insertMapInfo = {
+                        lat: parseFloat(row.LATITUDE)
+                        ,lng: parseFloat(row.LONGITUDE)
+                        ,beat: row.BEAT
+                        ,homicidetag: row.HomicideTag
+                        ,shootinjurytag: row.ShootInjuryTag
+                        ,shootnoinjurytag: row.ShootNoinInjuryTag
+                        ,shoottag: row.ShootTag
+                        ,address: row.ADDRESS
+                        ,date: dateFormat
+                        ,date2: dateFormat2
+                        ,time: row.TIME
+                        ,rdNumber: row.RD
+                        ,statute: row.STATUTE
+                        ,victims: row.Victims
+                        ,noofvictims: row.NoOfVictims
+                    }
+			
+        			pointData.push(insertMapInfo)  
+                    //console.log(insertMapInfo)              
+                })
+                
+        		for (var i = 0; i < pointData.length; i++) { 
+                    
+                    mapNewPoint(pointData[i]) 			
+                    
+                    $("#loading").hide();
+			
+        		}
+        	}
+	
+        	//layer control
+        	//var homicideLayer = L.layerGroup(homicides);
+        	//L.control.layers(homicideLayer).addTo(map);
+	
+        	//initTable();
+        });
+	
+        // INITIALIZE MAP //
+        
+        
+		//initalize layers
+		//var homicideLayer = L.layerGroup([])
+		
+		//initalize map
+		var map = L.map('map',{
+			center: [37.781027,-122.22393],
+			zoom: 12,
+            scrollWheelZoom: false
+			//layers: [homicideLayer]
+		})
+        
+        var layer = new L.StamenTileLayer("toner");
+        map.addLayer(layer);
+        
+		
+        /*
+		// api settings
+		L.tileLayer('http://{s}.tile.cloudmade.com/c74f93f2a2fc45b4a8a625de2e5bbbb8/998/256/{z}/{x}/{y}.png', {
+		    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery Â© <a href="http://cloudmade.com">CloudMade</a>',
+		    maxZoom: 18
+		}).addTo(map);
+        */
+    
+    })
+
+    </script>
+	
+	
+
+  </body>
+</html>
