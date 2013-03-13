@@ -167,12 +167,8 @@
         ,noInjury = []
         ,shooting = []
 
-        $(document).ready(function($){
 
-                        d3.csv('https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dGNLVEJoWGthSmJvUVgyOG5YeW9ZN2c&single=true&gid=0&output=csv', function(error, _json){
-                            
-            showInfo(_json)                
-            })
+                        d3.csv('https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dGNLVEJoWGthSmJvUVgyOG5YeW9ZN2c&single=true&gid=0&output=csv', function(error, _json){ showInfo(_json) })
 	        
             function mapNewPoint(pointData){
                 
@@ -210,9 +206,6 @@
                     
                     injury.push(point)                                
     			}
-    			//else if (pointData[5] == "TRUE") {
-    			//	shootNoInjuryPoint = new L.Marker(new L.LatLng(a[0], a[1]), { title: noinjurypop, icon:shootNoInjuryIcon, riseOnHover:true }).bindPopup(noinjurypop)//.addTo(map); //map points
-    			//}
     			else if (pointData.shoottag == "TRUE") {                        
                     var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
                     point = new L.circle(pntLatLng, 80, {
@@ -225,9 +218,7 @@
                     point.bindPopup(shootPop)   
                     
                     shooting.push(point)                                             
-    			}                
-                                                
-            
+    			}                                            
             }
             
         	//grab map info and plot
@@ -275,10 +266,6 @@
                 var homicideLayer = L.layerGroup(homicide).addTo(map);
                 var injuryLayer = L.layerGroup(injury).addTo(map);
                 var shootingLayer = L.layerGroup(shooting).addTo(map);
-                
-                var everything = []
-                
-                everything = shooting.concat(homicide, injury);
                                     
                 var overlayMarkers = {                 
                     "Homicides": homicideLayer,
@@ -288,22 +275,10 @@
                 
                 map.addControl(L.control.layers(null,overlayMarkers,{                
                     collapsed: false
-                }))
-                
+                }))                
         	}
 	
-        	//layer control
-        	//var homicideLayer = L.layerGroup(homicides);
-        	//L.control.layers(homicideLayer).addTo(map);
-	
-        	//initTable();
-        });
-	
         // INITIALIZE MAP //
-        
-        
-		//initalize layers
-		//var homicideLayer = L.layerGroup([])
 		
 		//initalize map
 		var map = L.map('map',{
