@@ -160,6 +160,12 @@
         /*    Create the map     */
     
         var pointData = [];
+        
+                
+        var homicide = []
+        ,injury = []
+        ,noInjury = []
+        ,shooting = []
 
         $(document).ready(function($){
 
@@ -170,6 +176,8 @@
 	        
             function mapNewPoint(pointData){
                 
+
+                
                 var homicidePop = ich.homicidePop(pointData, true);
                 var injuryPop = ich.injuryPop(pointData, true);
                 var noInjuryPop = ich.noInjuryPop(pointData, true);
@@ -178,40 +186,47 @@
     			//place points
     			if (pointData.homicidetag == "TRUE"){                        
                     var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
-                    homicidePoint = new L.circle(pntLatLng, 140, {
+                    point = new L.circle(pntLatLng, 140, {
                         color: 'red',
                         stroke: false,
                         fillOpacity: 0.8
                         
-                    }).addTo(map)
+                    })//.addTo(map)
                     
-                    homicidePoint.bindPopup(homicidePop)                        
+                    point.bindPopup(homicidePop)
+                    
+                    homicide.push(point)
     			}
     			else if (pointData.shootinjurytag == "TRUE") {
                     var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
-                    homicidePoint = new L.circle(pntLatLng, 100, {
+                    point = new L.circle(pntLatLng, 100, {
                         color: 'red',
                         weight: 1,
                         fillOpacity: 0.1
                         
-                    }).addTo(map)
+                    })//.addTo(map)
                                     
-                    homicidePoint.bindPopup(injuryPop)                                  
+                    point.bindPopup(injuryPop)  
+                    
+                    injury.push(point)                                
     			}
     			//else if (pointData[5] == "TRUE") {
-    			//	shootNoInjuryPoint = new L.Marker(new L.LatLng(a[0], a[1]), { title: noinjurypop, icon:shootNoInjuryIcon, riseOnHover:true }).bindPopup(noinjurypop).addTo(map); //map points
+    			//	shootNoInjuryPoint = new L.Marker(new L.LatLng(a[0], a[1]), { title: noinjurypop, icon:shootNoInjuryIcon, riseOnHover:true }).bindPopup(noinjurypop)//.addTo(map); //map points
     			//}
     			else if (pointData.shoottag == "TRUE") {                        
                     var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
-                    homicidePoint = new L.circle(pntLatLng, 80, {
+                    point = new L.circle(pntLatLng, 80, {
                         color: 'black',
                         stroke: false,
                         fillOpacity: 0.5
                         
-                    }).addTo(map)
+                    })//.addTo(map)
                                     
-                    homicidePoint.bindPopup(shootPop)                                                
-    			}
+                    point.bindPopup(shootPop)   
+                    
+                    shooting.push(point)                                             
+    			}                
+                                                
             
             }
             
@@ -252,13 +267,29 @@
                     //console.log(insertMapInfo)              
                 })
                 
-        		for (var i = 0; i < pointData.length; i++) { 
-                    
-                    mapNewPoint(pointData[i]) 			
-                    
-                    $("#loading").hide();
-			
+        		for (var i = 0; i < pointData.length; i++) {                     
+                    mapNewPoint(pointData[i]) 			                    
+                    $("#loading").hide();			
         		}
+                
+                var homicideLayer = L.layerGroup(homicide).addTo(map);
+                var injuryLayer = L.layerGroup(injury).addTo(map);
+                var shootingLayer = L.layerGroup(shooting).addTo(map);
+                
+                var everything = []
+                
+                everything = shooting.concat(homicide, injury);
+                                    
+                var overlayMarkers = {                 
+                    "Homicides": homicideLayer,
+                    "Injuries": injuryLayer,
+                    "Shootings": shootingLayer
+                }
+                
+                map.addControl(L.control.layers(null,overlayMarkers,{                
+                    collapsed: false
+                }))
+                
         	}
 	
         	//layer control
@@ -279,9 +310,8 @@
 			center: [37.781027,-122.22393],
 			zoom: 12,
             scrollWheelZoom: false
-			//layers: [homicideLayer]
 		})
-        
+
 //        var layer = new L.StamenTileLayer("terrain-background");
         var layer = new L.StamenTileLayer("toner-lite");
         map.addLayer(layer);        
