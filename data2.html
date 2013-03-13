@@ -282,8 +282,16 @@
 			//layers: [homicideLayer]
 		})
         
-        var layer = new L.StamenTileLayer("toner");
-        map.addLayer(layer);
+//        var layer = new L.StamenTileLayer("terrain-background");
+        var layer = new L.StamenTileLayer("toner-lite");
+        map.addLayer(layer);        
+        
+        
+        var layer3 = new L.StamenTileLayer("toner-lines");
+        //map.addLayer(layer3);
+        
+        var layer2 = new L.StamenTileLayer("toner-labels");
+        //map.addLayer(layer2);
         
 		
         /*
