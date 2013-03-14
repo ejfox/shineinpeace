@@ -147,169 +147,169 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
     
-    <script type="text/javascript" charset="utf-8">
-    $(document).ready(function(){        
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){        
         
-        $('#category-list li img').click( function(){
-            $('#category-list li').removeClass("active");
-            $(this).parent().addClass("active");
+$('#category-list li img').click( function(){
+    $('#category-list li').removeClass("active");
+    $(this).parent().addClass("active");
     
-        })
+})
     
         
-        /*    Create the map     */
+/*    Create the map     */
     
-        var pointData = [];
+var pointData = [];
         
                 
-        var homicide = []
-        ,injury = []
-        ,noInjury = []
-        ,shooting = []
+var homicide = []
+,injury = []
+,noInjury = []
+,shooting = []
 
 
-                        d3.csv('https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dGNLVEJoWGthSmJvUVgyOG5YeW9ZN2c&single=true&gid=0&output=csv', function(error, _json){ showInfo(_json) })
+                d3.csv('https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dGNLVEJoWGthSmJvUVgyOG5YeW9ZN2c&single=true&gid=0&output=csv', function(error, _json){ showInfo(_json) })
 	        
-            function mapNewPoint(pointData){
+    function mapNewPoint(pointData){
                 
 
                 
-                var homicidePop = ich.homicidePop(pointData, true);
-                var injuryPop = ich.injuryPop(pointData, true);
-                var noInjuryPop = ich.noInjuryPop(pointData, true);
-                var shootPop = ich.shootPop(pointData, true);  
+        var homicidePop = ich.homicidePop(pointData, true);
+        var injuryPop = ich.injuryPop(pointData, true);
+        var noInjuryPop = ich.noInjuryPop(pointData, true);
+        var shootPop = ich.shootPop(pointData, true);  
                 
-    			//place points
-    			if (pointData.homicidetag == "TRUE"){                        
-                    var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
-                    point = new L.circle(pntLatLng, 140, {
-                        color: 'red',
-                        stroke: false,
-                        fillOpacity: 0.8
+		//place points
+		if (pointData.homicidetag == "TRUE"){                        
+            var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
+            point = new L.circle(pntLatLng, 140, {
+                color: 'red',
+                stroke: false,
+                fillOpacity: 0.8
                         
-                    })//.addTo(map)
+            })//.addTo(map)
                     
-                    point.bindPopup(homicidePop)
+            point.bindPopup(homicidePop)
                     
-                    homicide.push(point)
-    			}
-    			else if (pointData.shootinjurytag == "TRUE") {
-                    var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
-                    point = new L.circle(pntLatLng, 100, {
-                        color: 'red',
-                        weight: 1,
-                        fillOpacity: 0.1
+            homicide.push(point)
+		}
+		else if (pointData.shootinjurytag == "TRUE") {
+            var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
+            point = new L.circle(pntLatLng, 100, {
+                color: 'red',
+                weight: 1,
+                fillOpacity: 0.1
                         
-                    })//.addTo(map)
+            })//.addTo(map)
                                     
-                    point.bindPopup(injuryPop)  
+            point.bindPopup(injuryPop)  
                     
-                    injury.push(point)                                
-    			}
-    			else if (pointData.shoottag == "TRUE") {                        
-                    var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
-                    point = new L.circle(pntLatLng, 80, {
-                        color: 'black',
-                        stroke: false,
-                        fillOpacity: 0.5
+            injury.push(point)                                
+		}
+		else if (pointData.shoottag == "TRUE") {                        
+            var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
+            point = new L.circle(pntLatLng, 80, {
+                color: 'black',
+                stroke: false,
+                fillOpacity: 0.5
                         
-                    })//.addTo(map)
+            })//.addTo(map)
                                     
-                    point.bindPopup(shootPop)   
+            point.bindPopup(shootPop)   
                     
-                    shooting.push(point)                                             
-    			}                                            
-            }
+            shooting.push(point)                                             
+		}                                            
+    }
             
-        	//grab map info and plot
-        	function showInfo(data) {
-                //console.log("DATA", data)
+	//grab map info and plot
+	function showInfo(data) {
+        //console.log("DATA", data)
                 
-        	    // data comes through as a simple array since simpleSheet is turned on
-        	    //alert("Successfully processed " + data.length + " rows!")
-        	    _.each(data, function(row){
+	    // data comes through as a simple array since simpleSheet is turned on
+	    //alert("Successfully processed " + data.length + " rows!")
+	    _.each(data, function(row){
                     
-                    //var dateFormat = moment(data[i].date, "D/M/YYYY" ).format("MMMM Do");                
-                    //var dateFormat = moment(row.DATE, "M/D/YYYY" ).fromNow(false)
-                    var dateFormat = moment(row.DATE + " " + row.Year, "MMMM D YYYY" ).fromNow(false)
-                    var dateFormat2 = moment(row.DATE + " " + row.Year, "MMMM D YYYY" ).format("MMM Do")
+            //var dateFormat = moment(data[i].date, "D/M/YYYY" ).format("MMMM Do");                
+            //var dateFormat = moment(row.DATE, "M/D/YYYY" ).fromNow(false)
+            var dateFormat = moment(row.DATE + " " + row.Year, "MMMM D YYYY" ).fromNow(false)
+            var dateFormat2 = moment(row.DATE + " " + row.Year, "MMMM D YYYY" ).format("MMM Do")
                     
                     
-                    //console.log("ROW>", row)
-                    insertMapInfo = {
-                        lat: parseFloat(row.LATITUDE)
-                        ,lng: parseFloat(row.LONGITUDE)
-                        ,beat: row.BEAT
-                        ,homicidetag: row.HomicideTag
-                        ,shootinjurytag: row.ShootInjuryTag
-                        ,shootnoinjurytag: row.ShootNoinInjuryTag
-                        ,shoottag: row.ShootTag
-                        ,address: row.ADDRESS
-                        ,date: dateFormat
-                        ,date2: dateFormat2
-                        ,time: row.TIME
-                        ,rdNumber: row.RD
-                        ,statute: row.STATUTE
-                        ,victims: row.Victims
-                        ,noofvictims: row.NoOfVictims
-                    }
+            //console.log("ROW>", row)
+            insertMapInfo = {
+                lat: parseFloat(row.LATITUDE)
+                ,lng: parseFloat(row.LONGITUDE)
+                ,beat: row.BEAT
+                ,homicidetag: row.HomicideTag
+                ,shootinjurytag: row.ShootInjuryTag
+                ,shootnoinjurytag: row.ShootNoinInjuryTag
+                ,shoottag: row.ShootTag
+                ,address: row.ADDRESS
+                ,date: dateFormat
+                ,date2: dateFormat2
+                ,time: row.TIME
+                ,rdNumber: row.RD
+                ,statute: row.STATUTE
+                ,victims: row.Victims
+                ,noofvictims: row.NoOfVictims
+            }
 			
-        			pointData.push(insertMapInfo)  
-                    //console.log(insertMapInfo)              
-                })
+			pointData.push(insertMapInfo)  
+            //console.log(insertMapInfo)              
+        })
                 
-        		for (var i = 0; i < pointData.length; i++) {                     
-                    mapNewPoint(pointData[i]) 			                    
-                    $("#loading").hide();			
-        		}
+		for (var i = 0; i < pointData.length; i++) {                     
+            mapNewPoint(pointData[i]) 			                    
+            $("#loading").hide();			
+		}
                 
-                var homicideLayer = L.layerGroup(homicide).addTo(map);
-                var injuryLayer = L.layerGroup(injury).addTo(map);
-                var shootingLayer = L.layerGroup(shooting).addTo(map);
+        var homicideLayer = L.layerGroup(homicide).addTo(map);
+        var injuryLayer = L.layerGroup(injury).addTo(map);
+        var shootingLayer = L.layerGroup(shooting).addTo(map);
                                     
-                var overlayMarkers = {                 
-                    "Homicides": homicideLayer,
-                    "Injuries": injuryLayer,
-                    "Shootings": shootingLayer
-                }
+        var overlayMarkers = {                 
+            "Homicides": homicideLayer,
+            "Injuries": injuryLayer,
+            "Shootings": shootingLayer
+        }
                 
-                map.addControl(L.control.layers(null,overlayMarkers,{                
-                    collapsed: false
-                }))                
-        	}
+        map.addControl(L.control.layers(null,overlayMarkers,{                
+            collapsed: false
+        }))                
+	}
 	
-        // INITIALIZE MAP //
+// INITIALIZE MAP //
 		
-		//initalize map
-		var map = L.map('map',{
-			center: [37.781027,-122.22393],
-			zoom: 12,
-            scrollWheelZoom: false
-		})
+//initalize map
+var map = L.map('map',{
+	center: [37.781027,-122.22393],
+	zoom: 12,
+    scrollWheelZoom: false
+})
 
 //        var layer = new L.StamenTileLayer("terrain-background");
-        var layer = new L.StamenTileLayer("toner-lite");
-        map.addLayer(layer);        
+var layer = new L.StamenTileLayer("toner-lite");
+map.addLayer(layer);        
         
         
-        var layer3 = new L.StamenTileLayer("toner-lines");
-        //map.addLayer(layer3);
+var layer3 = new L.StamenTileLayer("toner-lines");
+//map.addLayer(layer3);
         
-        var layer2 = new L.StamenTileLayer("toner-labels");
-        //map.addLayer(layer2);
+var layer2 = new L.StamenTileLayer("toner-labels");
+//map.addLayer(layer2);
         
 		
-        /*
-		// api settings
-		L.tileLayer('http://{s}.tile.cloudmade.com/c74f93f2a2fc45b4a8a625de2e5bbbb8/998/256/{z}/{x}/{y}.png', {
-		    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery Â© <a href="http://cloudmade.com">CloudMade</a>',
-		    maxZoom: 18
-		}).addTo(map);
-        */
+/*
+// api settings
+L.tileLayer('http://{s}.tile.cloudmade.com/c74f93f2a2fc45b4a8a625de2e5bbbb8/998/256/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery Â© <a href="http://cloudmade.com">CloudMade</a>',
+    maxZoom: 18
+}).addTo(map);
+*/
     
-    })
+})
 
-    </script>
+</script>
 	
 	
 
