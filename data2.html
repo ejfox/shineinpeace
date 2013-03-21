@@ -28,6 +28,8 @@
     <!--[if lt IE 9]>
       <script src="/js/html5shiv.js"></script>
     <![endif]-->
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
 
 
   </head>
@@ -126,8 +128,11 @@
     </div>
     
     <div id="section2">
-        <h1>Hello, world!</h1>
+        <a href="#" data-lat="37.805427" data-lng="-122.272596">Downtown</a> - 
+        <a href="#" data-lat="37.748729" data-lng="-122.175522">West Oakland</a> - 
+        <a href="#" data-lat="37.834463" data-lng="-122.267189">Uptown</a>
     </div>
+     
         
 
 
@@ -182,8 +187,8 @@ var homicide = []
 		//place points
 		if (pointData.homicidetag == "TRUE"){                        
             var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
-            point = new L.circle(pntLatLng, 140, {
-                color: 'red',
+            point = new L.circle(pntLatLng, 200, {
+                color: '#F30118',
                 stroke: false,
                 fillOpacity: 0.8
                         
@@ -196,9 +201,9 @@ var homicide = []
 		else if (pointData.shootinjurytag == "TRUE") {
             var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
             point = new L.circle(pntLatLng, 100, {
-                color: 'red',
-                weight: 1,
-                fillOpacity: 0.1
+                color: '#7D010C',
+                weight: 0,
+                fillOpacity: 0.5
                         
             })//.addTo(map)
                                     
@@ -208,10 +213,10 @@ var homicide = []
 		}
 		else if (pointData.shoottag == "TRUE") {                        
             var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
-            point = new L.circle(pntLatLng, 80, {
-                color: 'black',
+            point = new L.circle(pntLatLng, 75, {
+                color: '#2A0004',
                 stroke: false,
-                fillOpacity: 0.5
+                fillOpacity: 0.45
                         
             })//.addTo(map)
                                     
@@ -262,10 +267,10 @@ var homicide = []
             mapNewPoint(pointData[i]) 			                    
             $("#loading").hide();			
 		}
-                
-        var homicideLayer = L.layerGroup(homicide).addTo(map);
+
+        var shootingLayer = L.layerGroup(shooting).addTo(map);                
         var injuryLayer = L.layerGroup(injury).addTo(map);
-        var shootingLayer = L.layerGroup(shooting).addTo(map);
+        var homicideLayer = L.layerGroup(homicide).addTo(map);
                                     
         var overlayMarkers = {                 
             "Homicides": homicideLayer,
@@ -275,7 +280,8 @@ var homicide = []
                 
         map.addControl(L.control.layers(null,overlayMarkers,{                
             collapsed: false
-        }))                
+        }))
+                       
 	}
 	
     
@@ -290,6 +296,8 @@ var map = L.map('map',{
     scrollWheelZoom: false
 })
 
+map.attributionControl.addAttribution("Data Journalism by John Osborn");
+
 //        var layer = new L.StamenTileLayer("terrain-background");
 var layer = new L.StamenTileLayer("toner-lite");
 map.addLayer(layer);        
@@ -302,12 +310,30 @@ var layer2 = new L.StamenTileLayer("toner-labels");
 //map.addLayer(layer2);
 
 
+$("#section2 a").click(function(){
+    var center = {}
+    
+    center.lat = $(this).attr("data-lat")
+    ,center.lng = $(this).attr("data-lng")
+    
+    //alert(center.lat + " " + center.lng)
+    
+    map.panTo([center.lat, center.lng])
+    map.setZoom(14)
+
+})
+
+
+
+/* Hexmap stuff */
+
+
+
 
 var svg = d3.select(map.getPanes().overlayPane).append("svg"),
     g = svg.append("g").attr("class", "leaflet-zoom-hide");
     
-d3.json("data/oakincident_hex2.geojson", function(collection){
-    
+d3.json("data/oakland_victims.geojson", function(collection){    
     makeHexBin(collection);
 
     function project(x) {
@@ -321,6 +347,15 @@ d3.json("data/oakincident_hex2.geojson", function(collection){
             topRight = project(bounds[1]);
     
         var path = d3.geo.path().projection(project);
+        
+        var incidentMin = d3.min(collection.features, function(r) {  return r.properties.Victims }),
+        incidentMax = d3.max(collection.features, function(r) { return r.properties.Victims        });
+        
+        var incidentScale = d3.scale.linear()
+        .domain([0, incidentMax])
+        .range([0,0.95])
+        
+        console.log("MINMAX", incidentMin, incidentMax)
 
         var feature = g.selectAll("path")
             .data(collection.features)
@@ -333,6 +368,10 @@ d3.json("data/oakincident_hex2.geojson", function(collection){
             hexReset();
             
             function hexReset() {
+                
+                
+                var highlightColor = "black";
+                
                 var bottomLeft = project(bounds[0]),
                 topRight = project(bounds[1])
                 
@@ -344,6 +383,24 @@ d3.json("data/oakincident_hex2.geojson", function(collection){
                 g.attr("transform", "translate(" + -bottomLeft[0] + "," + -topRight[1] + ")")
                 
                 feature.attr("d", path)
+                
+                feature.style("fill-opacity", function(d,i) {
+                    if(d.properties.Victims != undefined ){
+                    return incidentScale(parseInt(d.properties.Victims))                                }
+                })
+                .style("fill", highlightColor)
+                .style("stroke", function(d,i) {
+                    if(d.properties.Victims > 0) {
+                        return highlightColor
+                    }
+                    else {
+                        return "rgba(220,220,220,0.85)"
+                    }
+                
+                })
+                .style("stroke-width", 0.5)
+                
+                
             
             }
       
