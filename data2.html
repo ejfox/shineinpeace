@@ -107,10 +107,9 @@
         <div id="left-map-menu">
             <h3>Behind left menu!</h3>
             <ul id="category-list">
-                <li class="active"><img src="http://placehold.it/350x250" /></li>
-                <li><img src="http://placehold.it/350x250" /></li>
-                <li><img src="http://placehold.it/350x250" /></li>
-                <li><img src="http://placehold.it/350x250" /></li>
+                <li class="active" id="points">Points</li>
+                <li id="hex">Hex</li>
+                <li>Data</li>
             </ul>
         </div>
         
@@ -155,11 +154,7 @@
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function(){        
         
-$('#category-list li img').click( function(){
-    $('#category-list li').removeClass("active");
-    $(this).parent().addClass("active");
-    
-})
+
     
         
 /*    Create the map     */
@@ -225,7 +220,8 @@ var homicide = []
             shooting.push(point)                                             
 		}                                            
     }
-            
+    
+    var shootingLayer, injuryLayer, homicideLayer;
 	//grab map info and plot
 	function showInfo(data) {
         //console.log("DATA", data)
@@ -268,9 +264,9 @@ var homicide = []
             $("#loading").hide();			
 		}
 
-        var shootingLayer = L.layerGroup(shooting).addTo(map);                
-        var injuryLayer = L.layerGroup(injury).addTo(map);
-        var homicideLayer = L.layerGroup(homicide).addTo(map);
+        shootingLayer = L.layerGroup(shooting).addTo(map);                
+        injuryLayer = L.layerGroup(injury).addTo(map);
+        homicideLayer = L.layerGroup(homicide).addTo(map);
                                     
         var overlayMarkers = {                 
             "Homicides": homicideLayer,
@@ -323,6 +319,32 @@ $("#section2 a").click(function(){
 
 })
 
+$('#category-list li').click( function(){
+    $('#category-list li').removeClass("active");
+    $(this).parent().addClass("active");
+    
+    var id = $(this).attr("id");
+        
+    if(id == "points") {
+        $("#hexmap").hide();
+        
+        map.addLayer(shootingLayer)
+        map.addLayer(homicideLayer)
+        map.addLayer(injuryLayer)
+        
+    }
+    else if ( id == "hex") {
+        $("#hexmap").show();        
+        
+        map.removeLayer(shootingLayer)
+        map.removeLayer(homicideLayer)
+        map.removeLayer(injuryLayer)
+        
+        
+    }
+    
+})
+
 
 
 /* Hexmap stuff */
@@ -332,6 +354,8 @@ $("#section2 a").click(function(){
 
 var svg = d3.select(map.getPanes().overlayPane).append("svg"),
     g = svg.append("g").attr("class", "leaflet-zoom-hide");
+    
+    g.style("display", "none").attr("id", "hexmap")
     
 d3.json("data/oakland_victims.geojson", function(collection){    
     makeHexBin(collection);
@@ -394,7 +418,7 @@ d3.json("data/oakland_victims.geojson", function(collection){
                         return highlightColor
                     }
                     else {
-                        return "rgba(220,220,220,0.85)"
+                        return "rgba(200,200,200,0.85)"
                     }
                 
                 })
