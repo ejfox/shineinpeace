@@ -268,14 +268,12 @@ window.dotsColored = true
         var shootPop = ich.shootPop(pointData, true);  
         
         var pntColor = colorScale(pointData.unix)        
-        console.log(pointData)
-console.log(+moment(pointData.DATE + " " + pointData.Year, "MMMM D YYYY" ))
+        //console.log(pointData)
+        //console.log(+moment(pointData.DATE + " " + pointData.Year, "MMMM D YYYY" ))
         
                 
 		//place points
 		if (pointData.homicidetag == "TRUE"){                       
-            
-            
             var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
             point = new L.circle(pntLatLng, 200, {
                 color: "red",
@@ -292,7 +290,7 @@ console.log(+moment(pointData.DATE + " " + pointData.Year, "MMMM D YYYY" ))
             })
             
             point.bindPopup(homicidePop)
-            colorPoint.bindPopup(shootPop) 
+            colorPoint.bindPopup(homicidePop) 
             
             if(window.dotsColored){
                 homicide.push(colorPoint)
@@ -348,7 +346,7 @@ console.log(+moment(pointData.DATE + " " + pointData.Year, "MMMM D YYYY" ))
             })
                                     
             point.bindPopup(shootPop) 
-            colorPoint.bindPopup(homicidePop)
+            colorPoint.bindPopup(shootPop)
             
             if(window.dotsColored){            
                 shooting.push(colorPoint)            
@@ -419,7 +417,7 @@ console.log(+moment(pointData.DATE + " " + pointData.Year, "MMMM D YYYY" ))
 
 
     
-        window.shootingLayer = shootingLayer = L.layerGroup(shooting).addTo(map);                
+        window.shootingLayer = shootingLayer = L.layerGroup(shooting).addTo(map);             
         window.injuryLayer   = injuryLayer   = L.layerGroup(injury).addTo(map);
         window.homicideLayer = homicideLayer = L.layerGroup(homicide).addTo(map);
         
@@ -497,8 +495,20 @@ $('#category-list li').click( function(){
     console.log("PARENT", $(this).parent())
     
     var id = $(this).attr("id");
-        
-    toggleHexmap()
+    
+    
+    if(id == "points") {
+        togglePoints();
+        toggleHexmap();        
+    }
+    else if (id == "hex") {
+        if($("#hexmap").css("display") == "none") {
+            toggleHexmap();
+            togglePoints();
+        }
+
+    }
+    
     
 })
 
@@ -506,12 +516,24 @@ function toggleHexmap() {
 
     if($("#hexmap").css("display") == "none") { 
         $("#hexmap").show();
-        map.removeLayer(shootingLayer)
-        map.removeLayer(homicideLayer)
-        map.removeLayer(injuryLayer)
     }
     else {        
         $("#hexmap").hide();        
+    }
+
+
+}
+function togglePoints() {
+
+    if(map.hasLayer(shootingLayer) 
+    && map.hasLayer(homicideLayer)
+    && map.hasLayer(injuryLayer)){
+    
+        map.removeLayer(homicideLayer)
+        map.removeLayer(injuryLayer)
+        map.removeLayer(shootingLayer)        
+    }
+    else {        
         map.addLayer(shootingLayer)
         map.addLayer(homicideLayer)
         map.addLayer(injuryLayer)
