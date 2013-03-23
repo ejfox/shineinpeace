@@ -30,8 +30,9 @@
     <![endif]-->
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
-
-
+    
+    
+    <link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
@@ -103,18 +104,77 @@
 		</div>
         -->
         
+        <div id="map-story">
+            <div id="sStepper">
+                <div id="stepper-sections">
+                    <div class="stepper-section" data-enter-callback="window.map.panTo([37.781027,-122.22393]); window.map.setZoom(12);" >
+                        <h2>Shine in Peace</h2>
+                        Introductory text. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                    <div class="stepper-section" data-enter-callback="window.map.panTo([37.805427,-122.272596]); window.map.setZoom(14);">
+                        <h2>Downtown</h2>
+                        <a href="#" 
+                        data-lat="37.805427" 
+                        data-lng="-122.272596">Downtown
+                        </a>
+                         dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                         <p><strong>See more stories from this neighborhood</strong></p>
+                    </div>
+                    
+                    <div class="stepper-section" data-enter-callback="window.map.panTo([37.822701,-122.271481]); window.map.setZoom(15);">
+                        <h2>Uptown</h2>
+                        <a href="#" 
+                        data-lat="37.822701" 
+                        data-lng="-122.271481">Uptown
+                        </a>
+                         dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                         <p><strong>See more stories from this neighborhood</strong></p>
+                    </div>
+            
+                    <div class="stepper-section" data-enter-callback="window.map.panTo([37.748729,-122.175522]); window.map.setZoom(14);">
+                        <h2>West Oakland</h2>
+                        <a href="#" 
+                        data-lat="37.748729" 
+                        data-lng="-122.175522">West Oakland
+                        </a>
+                         dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                         <p><strong>See more stories from this neighborhood</strong></p>
+                    </div>
+                    
+                    
+                    <div class="stepper-section" data-enter-callback="$('#hexmap').show(); window.map.panTo([37.781027,-122.22393]); window.map.setZoom(12)" data-exit-callback="$('#hexmap').hide();">
+                        <h2>Hexmap</h2>
+                        This hexmap shows concentrations of victims. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                    </div>
+                    
+                    
+                    <div class="stepper-section" data-enter-callback="window.map.panTo([37.781027,-122.22393]); window.map.setZoom(12); map.removeLayer(window.shootingLayer); map.removeLayer(window.injuryLayer);" data-exit-callback="map.addLayer(window.shootingLayer); map.addLayer(window.injuryLayer);">
+                        <h2>Just homicides</h2>
+                        Only show homicide points on map. 
+                    </div>
+                </div>
+                
+
+
+                
+                <ul id="stepper-nav">
+                    <li href="#prev" class="stepper-prev">Prev</li>
+                    <li href="#next" class="stepper-next">Next</li>
+                </ul>        
+            </div>        
+        </div>     
+        
+        
         
         <div id="left-map-menu">
-            <h3>Behind left menu!</h3>
+            <h3>Map Options</h3>
             <ul id="category-list">
-                <li class="active" id="points">Points</li>
-                <li id="hex">Hex</li>
-                <li>Data</li>
+                <li class="active" id="points">Points<img src="img/map.points.png" alt="Map.Points"></li>
+                <li id="hex">Victim heatmap<img src="img/map.hex.png" alt="Map.Hex"></li>
             </ul>
         </div>
         
         <div id="right-map-menu">
-            
             <div id="map-incidents">
                 <h3>Filter Map</h3>
                 <ul class="nav nav-pills nav-stacked">
@@ -123,19 +183,46 @@
                     <li><a href="#">Shootings with no injuries</a></li>
                 </ul>
             </div>
-        </div>
+        </div>        
     </div>
     
-    <div id="section2">
-        <a href="#" data-lat="37.805427" data-lng="-122.272596">Downtown</a> - 
-        <a href="#" data-lat="37.748729" data-lng="-122.175522">West Oakland</a> - 
-        <a href="#" data-lat="37.834463" data-lng="-122.267189">Uptown</a>
+    <div id="data" class="section section2">        
+        <h1>Data Breakdown</h1>
+        <ul id="fact-boxes">
+            <li>
+                <h3>Homicides / Incidents <strong>stacked bar chart</strong> per police beat</h3>
+            </li>
+            
+            <li>
+                <h3>Incident per hour breakdown <strong>bar chart</strong></h3>
+            </li>
+            
+            <li>
+                <h3>Incident per weekday <strong>bar chart / pie chart?</strong></h3>
+            </li>
+            
+            <li>
+                <h3>Time of day / Day of week with most shootings <strong>text</strong></h3>
+            </li>
+            
+            <li>
+                <h3>Percentage of incidents that end in injury <strong>pie chart</strong></h3>
+            </li>
+            
+            <li>
+                <h3>Number of victims / number of victims younger than 18 <strong>bar chart</strong></h3>
+            </li>
+            
+            <li>
+                <h3>Average victims per incident <strong>(bar chart)</strong></h3>
+            </li>
+        </ul>
     </div>
-     
+    
         
 
 
-        <footer class="row-fluid span12" >
+        <footer >
         	
         </footer>			
 
@@ -152,8 +239,9 @@
     <script src="js/bootstrap.js"></script>
     
 <script type="text/javascript" charset="utf-8">
-$(document).ready(function(){        
-        
+$(document).ready(function(){      
+    
+    
 
     
         
@@ -166,70 +254,128 @@ var homicide = []
 ,injury = []
 ,noInjury = []
 ,shooting = []
+,everything = []
+
+window.dotsColored = true
 
 
                 d3.csv('https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dGNLVEJoWGthSmJvUVgyOG5YeW9ZN2c&single=true&gid=0&output=csv', function(error, _json){ showInfo(_json) })
 	        
-    function mapNewPoint(pointData){
-                
-
-                
+    function mapNewPoint(pointData){                
         var homicidePop = ich.homicidePop(pointData, true);
         var injuryPop = ich.injuryPop(pointData, true);
         var noInjuryPop = ich.noInjuryPop(pointData, true);
         var shootPop = ich.shootPop(pointData, true);  
+        
+        var pntColor = colorScale(pointData.unix)        
+        console.log(pointData)
+console.log(+moment(pointData.DATE + " " + pointData.Year, "MMMM D YYYY" ))
+        
                 
 		//place points
-		if (pointData.homicidetag == "TRUE"){                        
+		if (pointData.homicidetag == "TRUE"){                       
+            
+            
             var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
             point = new L.circle(pntLatLng, 200, {
-                color: '#F30118',
+                color: "red",
                 stroke: false,
                 fillOpacity: 0.8
                         
-            })//.addTo(map)
-                    
+            })
+            
+            colorPoint = new L.circle(pntLatLng, 200, {
+                color: pntColor,
+                stroke: false,
+                fillOpacity: 0.8
+                        
+            })
+            
             point.bindPopup(homicidePop)
-                    
-            homicide.push(point)
+            colorPoint.bindPopup(shootPop) 
+            
+            if(window.dotsColored){
+                homicide.push(colorPoint)
+            }
+            else {
+                homicide.push(point)            
+            }
+            
 		}
 		else if (pointData.shootinjurytag == "TRUE") {
+                        
             var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
+
             point = new L.circle(pntLatLng, 100, {
                 color: '#7D010C',
                 weight: 0,
-                fillOpacity: 0.5
-                        
-            })//.addTo(map)
+                fillOpacity: 0.5                        
+            })
+
+
+            colorPoint = new L.circle(pntLatLng, 100, {
+                color: pntColor, //'#7D010C',
+                weight: 0,
+                fillOpacity: 0.5                        
+            })
                                     
             point.bindPopup(injuryPop)  
+            colorPoint.bindPopup(injuryPop)  
                     
-            injury.push(point)                                
+            if(window.dotsColored){            
+                injury.push(colorPoint)
+            }
+            else {
+                injury.push(point)
+            }
+
 		}
-		else if (pointData.shoottag == "TRUE") {                        
+		else if (pointData.shoottag == "TRUE") {            
+                                  
             var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
             point = new L.circle(pntLatLng, 75, {
                 color: '#2A0004',
                 stroke: false,
                 fillOpacity: 0.45
                         
-            })//.addTo(map)
+            })
+            
+            colorPoint = new L.circle(pntLatLng, 75, {
+                color: pntColor,
+                stroke: false,
+                fillOpacity: 0.45
+                        
+            })
                                     
-            point.bindPopup(shootPop)   
-                    
-            shooting.push(point)                                             
+            point.bindPopup(shootPop) 
+            colorPoint.bindPopup(homicidePop)
+            
+            if(window.dotsColored){            
+                shooting.push(colorPoint)            
+            }  
+            else {
+                shooting.push(point)
+            }
 		}                                            
     }
     
-    var shootingLayer, injuryLayer, homicideLayer;
+    var shootingLayer, injuryLayer, homicideLayer, colorLayer;
 	//grab map info and plot
-	function showInfo(data) {
-        //console.log("DATA", data)
-                
-	    // data comes through as a simple array since simpleSheet is turned on
-	    //alert("Successfully processed " + data.length + " rows!")
+	function showInfo(data) {        
+        var eventDates = []
+        
+        
+        
+
+        
+        
 	    _.each(data, function(row){
-                    
+            
+            eventDates.push(+moment(row.DATE + " " + row.Year, "MMMM D YYYY" ))
+
+            // Add the current time so the scale is always relative to now
+            eventDates.push(+moment())
+            
             //var dateFormat = moment(data[i].date, "D/M/YYYY" ).format("MMMM Do");                
             //var dateFormat = moment(row.DATE, "M/D/YYYY" ).fromNow(false)
             var dateFormat = moment(row.DATE + " " + row.Year, "MMMM D YYYY" ).fromNow(false)
@@ -253,26 +399,36 @@ var homicide = []
                 ,statute: row.STATUTE
                 ,victims: row.Victims
                 ,noofvictims: row.NoOfVictims
+                ,unix: +moment(row.DATE + " " + row.Year, "MMMM D YYYY" )
             }
 			
 			pointData.push(insertMapInfo)  
             //console.log(insertMapInfo)              
         })
+        
+        console.log("event minmax", [d3.min(eventDates), d3.max(eventDates)])
+        colorScale = d3.scale.linear()
+        .domain([d3.min(eventDates), d3.max(eventDates)])
+        .range(["black", "red"])
                 
 		for (var i = 0; i < pointData.length; i++) {                     
             mapNewPoint(pointData[i]) 			                    
             $("#loading").hide();			
 		}
+        
 
-        shootingLayer = L.layerGroup(shooting).addTo(map);                
-        injuryLayer = L.layerGroup(injury).addTo(map);
-        homicideLayer = L.layerGroup(homicide).addTo(map);
+
+    
+        window.shootingLayer = shootingLayer = L.layerGroup(shooting).addTo(map);                
+        window.injuryLayer   = injuryLayer   = L.layerGroup(injury).addTo(map);
+        window.homicideLayer = homicideLayer = L.layerGroup(homicide).addTo(map);
+        
                                     
         var overlayMarkers = {                 
             "Homicides": homicideLayer,
             "Injuries": injuryLayer,
             "Shootings": shootingLayer
-        }
+            }
                 
         map.addControl(L.control.layers(null,overlayMarkers,{                
             collapsed: false
@@ -286,7 +442,7 @@ var homicide = []
 // INITIALIZE MAP //
 		
 //initalize map
-var map = L.map('map',{
+var map = window.map = L.map('map',{
 	center: [37.781027,-122.22393],
 	zoom: 12,
     scrollWheelZoom: false
@@ -306,6 +462,22 @@ var layer2 = new L.StamenTileLayer("toner-labels");
 //map.addLayer(layer2);
 
 
+window.toggleDotColors = function toggleDotColors(){
+    if(window.dotsColored) {
+        window.dotsColored = false;
+        return false;
+    }
+    else {
+        window.dotsColored = true;
+        return true;
+    }
+}
+
+$("#dot-color-toggle").click(function(){
+    toggleDotColors();
+})
+
+
 $("#section2 a").click(function(){
     var center = {}
     
@@ -321,29 +493,32 @@ $("#section2 a").click(function(){
 
 $('#category-list li').click( function(){
     $('#category-list li').removeClass("active");
-    $(this).parent().addClass("active");
+    $(this).addClass("active");
+    console.log("PARENT", $(this).parent())
     
     var id = $(this).attr("id");
         
-    if(id == "points") {
-        $("#hexmap").hide();
-        
-        map.addLayer(shootingLayer)
-        map.addLayer(homicideLayer)
-        map.addLayer(injuryLayer)
-        
-    }
-    else if ( id == "hex") {
-        $("#hexmap").show();        
-        
+    toggleHexmap()
+    
+})
+
+function toggleHexmap() {
+
+    if($("#hexmap").css("display") == "none") { 
+        $("#hexmap").show();
         map.removeLayer(shootingLayer)
         map.removeLayer(homicideLayer)
         map.removeLayer(injuryLayer)
-        
-        
     }
-    
-})
+    else {        
+        $("#hexmap").hide();        
+        map.addLayer(shootingLayer)
+        map.addLayer(homicideLayer)
+        map.addLayer(injuryLayer)
+    }
+
+
+}
 
 
 
@@ -378,8 +553,6 @@ d3.json("data/oakland_victims.geojson", function(collection){
         var incidentScale = d3.scale.linear()
         .domain([0, incidentMax])
         .range([0,0.95])
-        
-        console.log("MINMAX", incidentMin, incidentMax)
 
         var feature = g.selectAll("path")
             .data(collection.features)
@@ -423,15 +596,9 @@ d3.json("data/oakland_victims.geojson", function(collection){
                 
                 })
                 .style("stroke-width", 0.5)
-                
-                
-            
-            }
-      
-
-    }
-	
-
+                                            
+            }      
+    }	    
 
 })    
 	
@@ -445,6 +612,17 @@ L.tileLayer('http://{s}.tile.cloudmade.com/c74f93f2a2fc45b4a8a625de2e5bbbb8/998/
     
 })
 
+</script>
+
+<script src="js/sStepper.js" type="text/javascript" charset="utf-8"></script>
+    
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){      
+    
+    
+sStepper.init("#sStepper");  
+
+})
 </script>
 	
 	

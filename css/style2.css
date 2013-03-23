@@ -3,6 +3,7 @@ html {
   height: 100%;
 }
 body {
+  font-family: 'Gudea', sans-serif;
   font-size: 100%;
   line-height: 1.4em;
   overflow-x: hidden;
@@ -10,16 +11,19 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
+  background-color: #f4f4f4;
 }
 #section1 {
   width: 100%;
   height: 90%;
+  position: relative;
 }
 #section2 {
   padding: 1em;
   height: 100%;
 }
 #map {
+  position: relative;
   z-index: 1;
   height: 100%;
   width: 100%;
@@ -40,6 +44,61 @@ body {
   width: 40%;
   left: 50%;
   margin-left: -20%;
+}
+#map-story {
+  font-size: 0.9em;
+  line-height: 1.4em;
+  position: absolute;
+  right: 12px;
+  bottom: 38px;
+  z-index: 9999;
+  padding: .4em 1.2em;
+  border-radius: 0.2em;
+  max-width: 25%;
+  max-height: 90%;
+  overflow: auto;
+  text-shadow: 0 1px 0px rgba(14, 14, 14, 0.7);
+  background-color: #4d4d4d;
+  background-image: -webkit-gradient(radial, 50% 0%, 0, 50% 0%, 200, from(#212121), to(#4d4d4d));
+  background-image: -webkit-radial-gradient(50% 0%, #4d4d4d, #212121);
+  background-image: -moz-radial-gradient(50% 0%, #4d4d4d, #212121);
+  background-image: -o-radial-gradient(50% 0%, #4d4d4d, #212121);
+  background-image: -ms-radial-gradient(50% 0%, #4d4d4d, #212121);
+  background-image: radial-gradient(50% 0%, #4d4d4d, #212121);
+}
+#map-story .hidden-step {
+  display: none;
+}
+#map-story #stepper-nav {
+  padding: 0;
+}
+#map-story #stepper-nav li {
+  background-color: white;
+  display: inline-block;
+  list-style-type: none;
+  cursor: pointer;
+  padding: .2em .4em;
+  border-radius: 4px;
+  border: 1px solid #CCC;
+  margin: 0;
+  margin-right: .4em;
+  text-shadow: 0 1px 1px rgba(14, 14, 14, 0.1);
+  background-color: #f5f4f6;
+  background-image: -webkit-gradient(radial, 50% 0%, 0, 50% 0%, 200, from(#d6d6d6), to(#f5f4f6));
+  background-image: -webkit-radial-gradient(50% 0%, #f5f4f6, #d6d6d6);
+  background-image: -moz-radial-gradient(50% 0%, #f5f4f6, #d6d6d6);
+  background-image: -o-radial-gradient(50% 0%, #f5f4f6, #d6d6d6);
+  background-image: -ms-radial-gradient(50% 0%, #f5f4f6, #d6d6d6);
+  background-image: radial-gradient(50% 0%, #f5f4f6, #d6d6d6);
+}
+#map-story #stepper-sections {
+  color: white;
+}
+#map-story #stepper-sections a:link,
+#map-story #stepper-sections a:hover,
+#map-story #stepper-sections a:visited {
+  color: white;
+  font-weight: bold;
 }
 #intro {
   padding: 8px;
@@ -68,21 +127,20 @@ body {
   text-align: center;
 }
 .leaflet-left {
-  left: 17% !important;
+  left: 19% !important;
 }
 .leaflet-control-layers-overlays {
-  font-size: 1em;
+  font-size: 1.5em;
 }
 #left-map-menu,
 #right-map-menu {
   z-index: 999999;
   font-size: 0.8em !important;
-  width: 12%;
+  width: 16%;
   position: absolute;
   top: 12px;
-  border: 1px solid black;
   border-radius: 4px;
-  padding: 2%;
+  padding: .8em;
   padding-top: .1em;
   background-color: #d6d6d6;
   background-image: -webkit-gradient(radial, 50% 100%, 0, 50% 100%, 200, from(#ffffff), to(#d6d6d6));
@@ -99,6 +157,13 @@ body {
 }
 #left-map-menu {
   left: 6px;
+  -webkit-box-shadow: 0px 0px 12px 0px rgba(25, 25, 25, 0.45);
+  box-shadow: 0px 0px 12px 0px rgba(25, 25, 25, 0.45);
+}
+#left-map-menu h2,
+#left-map-menu h3 {
+  margin: 0;
+  margin-top: 0.2em;
 }
 #right-map-menu {
   display: none;
@@ -111,7 +176,6 @@ body {
 #data-container {
   height: 100%;
   padding: 0;
-  background-color: white !important;
   width: 100%;
   margin: 0 auto;
   position: relative;
@@ -128,25 +192,52 @@ body {
   margin: 0;
 }
 #category-list li {
-  opacity: 0.45;
+  font-weight: bold;
+  opacity: 0.55;
   list-style-type: none;
   margin: 0;
   padding: 0;
   margin-top: 0.8em;
   cursor: pointer;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
 }
 #category-list li img {
   border-radius: 4px;
-}
-#category-list li:hover {
-  opacity: 0.8;
 }
 #category-list .active {
   opacity: 1;
 }
 #category-list .active img {
-  border: 2px solid #999;
-  margin-left: -1px;
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(25, 25, 25, 0.15);
+  box-shadow: 0px 0px 6px 0px rgba(25, 25, 25, 0.15);
+}
+#data h1,
+#data h2,
+#data h3,
+#data h4 {
+  padding: .1em 1em;
+  text-align: center;
+}
+#data ul {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+#data ul li {
+  list-style-type: none;
+  width: 42%;
+  height: 220px;
+  margin: 1em;
+  border-radius: 0.2em;
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid #999;
+}
+#data ul li h2 {
+  padding: 0.5em;
 }
 .leaflet-popup-content {
   font-size: 0.9em;

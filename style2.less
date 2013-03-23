@@ -1,6 +1,7 @@
 html { height: 100%; height: 100%;}
 
 body {
+    font-family: 'Gudea', sans-serif;
     font-size: 100%;
     line-height: 1.4em;
 	overflow-x: hidden;
@@ -8,11 +9,16 @@ body {
     height: 100%;
     padding: 0;
     margin: 0;
+    background-color: #f4f4f4;
 }
 
-#section1 { width: 100%; height: 90%;}
-#section2 { padding: 1em; height: 100%;}
+#section1 { width: 100%; height: 90%; position: relative; }
+#section2 { 
+    padding: 1em; 
+    height: 100%;
+}
 #map {
+    position: relative;
     z-index: 1;
 	height: 100%;
     width: 100%;
@@ -28,22 +34,88 @@ body {
  	border-radius: 6px;
     
     #loading {
-    font-size: 72px;
-    z-index: 999;
-    position: absolute;
-    width: 40%;
-    left: 50%;
-    margin-left: -20%;
+        font-size: 72px;
+        z-index: 999;
+        position: absolute;
+        width: 40%;
+        left: 50%;
+        margin-left: -20%;
     }
 }
+
+#map-story {
+    font-size: 0.9em;
+    line-height: 1.4em;
+    
+    
+    position: absolute;
+    right: 12px;
+    bottom: 38px;
+    z-index: 9999;
+    padding: .4em 1.2em;
+    border-radius: 0.2em;
+    max-width: 25%;
+    max-height: 90%;
+    overflow: auto;
+    
+    text-shadow: 0 1px 0px rgba(14,14,14,0.7);
+    
+    background-color: #4d4d4d;
+    background-image: -webkit-gradient(radial, 50% 0%,0,50% 0%,200, from(rgb(33, 33, 33)), to(rgb(77, 77, 77)));
+    background-image: -webkit-radial-gradient(50% 0%, rgb(77, 77, 77), rgb(33, 33, 33));
+    background-image: -moz-radial-gradient(50% 0%, rgb(77, 77, 77), rgb(33, 33, 33));
+    background-image: -o-radial-gradient(50% 0%, rgb(77, 77, 77), rgb(33, 33, 33));
+    background-image: -ms-radial-gradient(50% 0%, rgb(77, 77, 77), rgb(33, 33, 33));
+    background-image: radial-gradient(50% 0%, rgb(77, 77, 77), rgb(33, 33, 33));
+    
+
+
+    .hidden-step {
+        display: none;
+    }
+    #stepper-nav { padding: 0;}
+    
+    #stepper-nav li { 
+        background-color: white;
+        display: inline-block;
+        list-style-type: none;
+        cursor: pointer;
+        padding: .2em .4em;
+        border-radius: 4px;
+        border: 1px solid #CCC;
+        margin: 0;
+        margin-right: .4em;
+        text-shadow: 0 1px 1px rgba(14,14,14,0.1);
+        
+        background-color: #f5f4f6;
+        background-image: -webkit-gradient(radial, 50% 0%,0,50% 0%,200, from(rgb(214, 214, 214)), to(rgb(245, 244, 246)));
+        background-image: -webkit-radial-gradient(50% 0%, rgb(245, 244, 246), rgb(214, 214, 214));
+        background-image: -moz-radial-gradient(50% 0%, rgb(245, 244, 246), rgb(214, 214, 214));
+        background-image: -o-radial-gradient(50% 0%, rgb(245, 244, 246), rgb(214, 214, 214));
+        background-image: -ms-radial-gradient(50% 0%, rgb(245, 244, 246), rgb(214, 214, 214));
+        background-image: radial-gradient(50% 0%, rgb(245, 244, 246), rgb(214, 214, 214));
+
+        
+    }
+
+    #stepper-sections { 
+        color: white; 
+        
+        a:link, a:hover, a:visited {
+            color: white;
+            font-weight: bold;        
+        }    
+    }
+
+}
+
 #intro {
 	padding: 8px;
 }
 #topic-page .topicstory {
 	margin: 6px !important; 
 }
-.topicstory {
-	
+.topicstory {	
 	margin-top: 12px;
 	border: 1px solid #CCC;
 	border-radius: 6px;
@@ -69,27 +141,27 @@ body {
 }
 
 .leaflet-left {
-    left: 17% !important;
+    left: 19% !important;
 }
 .leaflet-right {
     //right: 17% !important;
 }
 .leaflet-control-layers-overlays {
-font-size: 1em;
+font-size: 1.5em;
 }
 
 #left-map-menu, #right-map-menu {
     z-index: 999999;
     
     font-size: 0.8em !important;
-    width: 12%;
+    width: 16%;
     //height: 100%;
     position: absolute;
     top: 12px;
-    border: 1px solid black;
+    //border: 1px solid black;
     border-radius: 4px;
 
-    padding: 2%;
+    padding: .8em;
     padding-top: .1em;
     //margin-top: 2%;
         
@@ -102,14 +174,18 @@ font-size: 1em;
     background-image: radial-gradient(50% 100%, rgb(214, 214, 214), rgb(255, 255, 255));
     
     img {
-    width: 100%;
-    height: auto;
+        width: 100%;
+        height: auto;
     }
 }
 
 #left-map-menu {
     left: 6px;
     //padding-right: 4%;
+    h2,h3 { margin: 0; margin-top: 0.2em; }
+    -webkit-box-shadow: 0px 0px 12px 0px rgba(25,25,25,0.45); 
+            box-shadow: 0px 0px 12px 0px rgba(25,25,25,0.45); 
+    
     
 }
 #right-map-menu {
@@ -128,7 +204,6 @@ font-size: 1em;
 #data-container {
     height: 100%;
     padding: 0;
-    background-color: white !important; 
     
     
     //width: 60%; 
@@ -148,9 +223,10 @@ font-size: 1em;
 #category-list {
     padding: 0;
     margin: 0;
-    
+        
         li { 
-            opacity: 0.45;
+            font-weight: bold;
+            opacity: 0.55;
             list-style-type: none;
             margin: 0;
             padding: 0;
@@ -160,21 +236,68 @@ font-size: 1em;
             img { border-radius: 4px; }
             
             &:hover {
-                opacity: 0.8;
+                //opacity: 0.8;
             }
+            
+            -webkit-transition: all 0.3s ease-out;
+               -moz-transition: all 0.3s ease-out;
+                 -o-transition: all 0.3s ease-out;
+                    transition: all 0.3s ease-out;
         }
         
         .active {
             opacity: 1;
             
             img {
-                border: 2px solid #999;
-                margin-left: -1px;
+            -webkit-box-shadow: 0px 0px 6px 0px rgba(25,25,25,0.15); 
+                    box-shadow: 0px 0px 6px 0px rgba(25,25,25,0.15); 
             }
         }
+}
 
+#data {
+
+    h1,h2,h3,h4 {
+        padding: .1em 1em;
+        text-align: center;
+    }
+
+    
+    ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+        
+        li {
+
+            list-style-type: none;
+            width: 42%;
+            height: 220px;
+            
+            margin: 1em;
+            
+            border-radius: 0.2em;
+            display: inline-block;
+            vertical-align: top;
+            border: 1px solid #999;
+            
+            h2 { padding: 0.5em; }
+            
+        }
+    
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
 
 .leaflet-popup-content {
     font-size: 0.9em;
