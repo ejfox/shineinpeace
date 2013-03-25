@@ -22,6 +22,10 @@
 	<script src="js/moment.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/underscore.js" type="text/javascript" charset="utf-8"></script>	
     <script src="http://d3js.org/d3.v3.min.js"></script>
+    
+    <script src="js/nv.d3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/src/utils.js" type="text/javascript" charset="utf-8"></script>
+    
     <!-- ><link href="css/bootstrap-responsive.css" rel="stylesheet"> -->
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -203,23 +207,26 @@
     <div id="data" class="section section2">        
         <h1>Data Breakdown</h1>
         <ul id="fact-boxes">
-            <li>
+            <li id="beat-breakdown">
                 <h3>Homicides / Incidents <strong>stacked bar chart</strong> per police beat</h3>
             </li>
             
-            <li>
+            <li id="hour-breakdown">
                 <h3>Incident per hour breakdown <strong>bar chart</strong></h3>
+                <svg class="chart"></svg>
             </li>
             
-            <li>
+            <li id="weekday-breakdown">
                 <h3>Incident per weekday <strong>bar chart / pie chart?</strong></h3>
+                <svg class="chart"></svg>
+                
             </li>
             
-            <li>
-                <h3>Time of day / Day of week with most shootings <strong>text</strong></h3>
+            <li id="time-day-mostshootings">
+                <h3 >Time of day / Day of week with most shootings <strong>text</strong></h3>
             </li>
             
-            <li>
+            <li id="injury-percentage">
                 <h3>Percentage of incidents that end in injury <strong>pie chart</strong></h3>
             </li>
             
@@ -615,7 +622,15 @@ d3.json("data/oakland_victims.geojson", function(collection){
         // because it can be 0-1
         var incidentScale = d3.scale.linear()
         .domain([0, incidentMax])
-        .range([0,0.95])
+        .range([0.05,1])
+        
+
+        var incidentScaleColor = d3.scale.linear()
+            .domain([0, incidentMax])
+            .interpolate(d3.interpolateHsl)
+            .range(['black', '#D40067'])
+    
+    
 
         var feature = g.selectAll("path")
             .data(collection.features)
@@ -643,11 +658,19 @@ d3.json("data/oakland_victims.geojson", function(collection){
                 
                 feature.attr("d", path)
                 
+
                 feature.style("fill-opacity", function(d,i) {
                     if(d.properties.Victims != undefined ){
                     return incidentScale(parseInt(d.properties.Victims))                                }
                 })
-                .style("fill", highlightColor)
+                
+                feature.style("fill", function(d,i){
+                    if(d.properties.Victims != undefined ){
+                        return incidentScaleColor(parseInt(d.properties.Victims))                          }
+                })
+                
+                feature
+                //.style("fill", highlightColor)
                 .style("stroke", function(d,i) {
                     if(d.properties.Victims > 0) {
                         return highlightColor
@@ -674,6 +697,35 @@ L.tileLayer('http://{s}.tile.cloudmade.com/c74f93f2a2fc45b4a8a625de2e5bbbb8/998/
     
 })
 
+
+// Smooth scrolling
+
+window.ScrollToData = function scrollToData() {
+        var target = $("#data");
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+           if (target.length) {
+             $('html,body').animate({
+                 scrollTop: target.offset().top
+            }, 1600);
+            return false;
+        }
+    }
+
+$('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
+        || location.hostname == this.hostname) {
+
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+           if (target.length) {
+             $('html,body').animate({
+                 scrollTop: target.offset().top
+            }, 1600);
+            return false;
+        }
+    }
+});
+
 </script>
 
 <script src="js/sStepper.js" type="text/javascript" charset="utf-8"></script>
@@ -684,6 +736,150 @@ $(document).ready(function(){
     sStepper.init("#sStepper");  
 
 })
+</script>
+
+<script type="text/javascript" charset="utf-8">
+
+
+var makeBarChart = function makeBarchart(targetElement, data) {
+
+    $targetElement = $(targetElement)
+
+    var width = $targetElement.width(),
+    height = $targetElement.height();
+  
+      nv.addGraph({
+        generate: function() {
+            
+        dataBreakdown = data
+        
+        dataBreakdown = _.sortBy(dataBreakdown, function(row,i){
+            return i
+        })
+        dataBreakdown = _.map(dataBreakdown, function(row, i){
+            return {
+                "label": i,
+                "value": row              
+            }
+        })
+        
+            
+        
+          var chart = nv.models.discreteBarChart()
+              //.showValues(true)
+              .tooltips(true)
+              //.width(width)
+              //.height(height)
+              .x(function(d){ return d.label })
+              .y(function(d){ return d.value })              
+              
+          
+          console.log("dbd", dataBreakdown)
+          
+          d3.select(targetElement+" .chart")
+            .attr('width', width)
+            .attr('height', height)
+            .datum([{
+                key: "Hour breakdown",
+                values: dataBreakdown
+            }])
+            .call(chart);
+            
+            
+            chart.yAxis
+            
+          return chart;
+        },
+        callback: function(graph) {
+
+
+          /*
+          graph.dispatch.on('elementClick', function(e) {
+              console.log("Bar Click",e);
+          });
+
+          graph.dispatch.on('chartClick', function(e) {
+              console.log("Chart Click",e);
+          });
+
+          graph.dispatch.on('chartClick', function(e) {
+              console.log('Click Switching to');
+              if (td === 0) {
+                  d3.select("#test1")
+                          .datum(testdata2)
+                          .call(graph);
+                  td = 1;
+
+              } else {
+                  d3.select("#test1")
+                          .datum(testdata)
+                          .call(graph);
+                  td = 0;
+              }
+            });
+          */
+
+
+          window.onresize = function() {
+          
+          var width = $targetElement.width(),
+          height = $targetElement.height();
+          
+          
+            graph
+              .width(width)
+              .height(height)
+
+            d3.select(targetElement+" .chart")
+                .attr('width', width)
+                .attr('height', height)
+              .call(graph);
+          };
+        }
+      });
+} 
+
+
+
+
+// Data / stats stuff
+
+d3.csv('https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdHZoYWM5UklxaXI4bEpqS3cta1hid1E&output=csv', function(error, _json){
+        
+      console.log(_json[0])
+      
+      
+      var count = {}
+      
+      count.shootings = _json.length
+      
+      count.beat = _.countBy(_json, function(d){ return d.BEAT })
+      count.desc = _.countBy(_json, function(d){ return d.DESCRIPTION })
+      count.homicides = _.countBy(_json, function(d){ return d.HomicideTag })
+      count.injuries = _.countBy(_json, function(d){ return d.ShootInjuryTag })
+      count.hourBreakdown = _.countBy(_json, function(d){ return moment(d.TIME, "h:m A" ).format("HH"); })
+      count.dayBreakdown = _.countBy(_json, function(d){  return moment(d.DATE + " " + d.Year, "MMMM DD YYYY" ).format("ddd"); })
+      
+      
+      $("#beat-breakdown").text(JSON.stringify(count.beat))
+      //$("#hour-breakdown").text(JSON.stringify(count.hourBreakdown))
+      //$("#weekday-breakdown").text(JSON.stringify(count.dayBreakdown))     
+      $("#injury-percentage").text(JSON.stringify(count.injuries))
+      
+      
+      
+      console.log("COUNT!", count)
+      
+      makeBarChart("#hour-breakdown", count.hourBreakdown)
+
+      makeBarChart("#weekday-breakdown", count.dayBreakdown)
+      
+      
+    })
+    
+    
+   
+
 </script>
 	
 	
