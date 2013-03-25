@@ -67,13 +67,10 @@ sStepper.switchTo = function(targetNum) {
     exitCallback = $("#stepper-section-" + currentStep).attr("data-exit-callback");
     enterCallback = $("#stepper-section-" + targetNum).attr("data-enter-callback");
   }
-  if (exitCallback !== void 0) {
-      console.log("exitCB", exitCallback)
-      
+  if (exitCallback !== void 0) {      
     eval(exitCallback);
   }
   if (enterCallback !== void 0) {
-      console.log("enterCB", enterCallback)      
     eval(enterCallback);
   }
 
