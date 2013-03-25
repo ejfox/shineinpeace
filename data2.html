@@ -142,7 +142,14 @@
                     </div>
                     
                     
-                    <div class="stepper-section" data-enter-callback="$('#hexmap').show(); window.map.panTo([37.781027,-122.22393]); window.map.setZoom(12)" data-exit-callback="$('#hexmap').hide();">
+                    <div class="stepper-section" 
+                    data-enter-callback="
+                    window.toggleHexmap(); 
+                    window.togglePoints(); 
+                    
+                    window.map.panTo([37.781027,-122.22393]); 
+                    window.map.setZoom(12)" 
+                    data-exit-callback="window.toggleHexmap();         window.togglePoints(); ">
                         <h2>Hexmap</h2>
                         This hexmap shows concentrations of victims. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                     </div>
@@ -152,6 +159,13 @@
                         <h2>Just homicides</h2>
                         Only show homicide points on map. 
                     </div>
+                    
+                    <div class="stepper-section">
+                        <h2>Another step</h2>
+                        Step.
+                    </div>
+                    
+                    
                 </div>
                 
 
@@ -535,31 +549,33 @@ $('#category-list li').click( function(){
 })
 
 // Functions to toggle the points and the hexmap
-function toggleHexmap() {
-    if($("#hexmap").css("display") == "none") { 
-        $("#hexmap").show();
+window.toggleHexmap = function toggleHexmap() {
+    if($("#hexmap").css("display") == "inline") { 
+        $("#hexmap").hide();                
     }
     else {        
-        $("#hexmap").hide();        
+
+        $("#hexmap").show();
     }
 
 
 }
 
-function togglePoints() {
+window.togglePoints = function togglePoints() {
 
-    if(map.hasLayer(shootingLayer) 
-    && map.hasLayer(homicideLayer)
-    && map.hasLayer(injuryLayer)){
-    
-        map.removeLayer(homicideLayer)
-        map.removeLayer(injuryLayer)
-        map.removeLayer(shootingLayer)        
-    }
-    else {        
+    if(!map.hasLayer(shootingLayer) 
+    && !map.hasLayer(homicideLayer)
+    && !map.hasLayer(injuryLayer)){
+
         map.addLayer(shootingLayer)
         map.addLayer(homicideLayer)
-        map.addLayer(injuryLayer)
+        map.addLayer(injuryLayer)    
+       
+    }
+    else {             
+        map.removeLayer(homicideLayer)
+        map.removeLayer(injuryLayer)
+        map.removeLayer(shootingLayer) 
     }
 
 
