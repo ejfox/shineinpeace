@@ -151,10 +151,10 @@ nv.models.discreteBarChart = function() {
 
       //------------------------------------------------------------
       // Setup Axes
-
+      
       xAxis
         .scale(x)
-        .ticks( availableWidth / 100 )
+        .ticks( availableWidth / 150 )
         .tickSize(-availableHeight, 0);
 
       g.select('.nv-x.nv-axis')
@@ -169,6 +169,7 @@ nv.models.discreteBarChart = function() {
       if (staggerLabels) {
         xTicks
             .selectAll('text')
+            
             .attr('transform', function(d,i,j) { return 'translate(0,' + (j % 2 == 0 ? '5' : '17') + ')' })
       }
 

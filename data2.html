@@ -164,9 +164,11 @@
                         Only show homicide points on map. 
                     </div>
                     
-                    <div class="stepper-section">
-                        <h2>Another step</h2>
-                        Step.
+                    <div class="stepper-section"
+                    
+                    data-exit-callback="window.scrollToData()">
+                        <h2>Look at our data!</h2>
+                        
                     </div>
                     
                     
@@ -704,16 +706,7 @@ L.tileLayer('http://{s}.tile.cloudmade.com/c74f93f2a2fc45b4a8a625de2e5bbbb8/998/
 
 // Smooth scrolling
 
-window.ScrollToData = function scrollToData() {
-        var target = $("#data");
-        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-           if (target.length) {
-             $('html,body').animate({
-                 scrollTop: target.offset().top
-            }, 1600);
-            return false;
-        }
-    }
+
 
 $('a[href*=#]:not([href=#])').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
@@ -729,6 +722,17 @@ $('a[href*=#]:not([href=#])').click(function() {
         }
     }
 });
+
+window.scrollToData = function scrollToData() {
+        var target = $("#data");
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+           if (target.length) {
+             $('html,body').animate({
+                 scrollTop: target.offset().top - 24
+            }, 1600);
+            return false;
+        }
+    }
 
 </script>
 
@@ -778,7 +782,8 @@ var makePieChart = function makePieChart(targetElement, data) {
             .y(function(d) { return d.y })
             //.showLabels(false)
             .values(function(d) { return d })
-            .color(d3.scale.category10().range())
+            //.color(d3.scale.category10().range())
+            .color(function(d,i){ if( i % 2 == 0 ) { return "black"} else { return "#999"} })            
             //.width(width)
             //.height(height);
 
@@ -805,11 +810,31 @@ var makeBarChart = function makeBarchart(targetElement, data) {
         generate: function() {
             
         dataBreakdown = data
+        console.log("DATA", data)
         
+        console.log(dataBreakdown)
+        
+        // TODO: Find a better way to sort that doesn't fuck up the objects
+        /*
         dataBreakdown = _.sortBy(dataBreakdown, function(row,i){
-            return i
+            if(targetElement == "#beat-breakdown") {
+                return -row
+            }
+            else {
+                return i
+            }
         })
+        */
         dataBreakdown = _.map(dataBreakdown, function(row, i){
+            
+            if(targetElement == "#hour-breakdown") {
+                console.log("ROW", row)
+                var ourHour = moment(i.toString(), "H")
+                
+                i = ourHour.format("ha")
+            
+            }
+           
             return {
                 "label": i,
                 "value": row              
@@ -824,7 +849,10 @@ var makeBarChart = function makeBarchart(targetElement, data) {
               //.width(width)
               //.height(height)
               .x(function(d){ return d.label })
-              .y(function(d){ return d.value })              
+              .y(function(d){ return d.value })
+              .color(function(){ return "black" })
+              .margin({top: 24, right: 36, bottom: 24, left: 36})
+                           
               
           
           d3.select(targetElement+" .chart")
@@ -839,6 +867,7 @@ var makeBarChart = function makeBarchart(targetElement, data) {
             
             chart.yAxis
             
+                        
           return chart;
         },
         callback: function(graph) {
@@ -871,6 +900,7 @@ var makeBarChart = function makeBarchart(targetElement, data) {
           */
 
 
+          /*
           window.onresize = function() {
           
           var width = $targetElement.width(),
@@ -886,6 +916,8 @@ var makeBarChart = function makeBarchart(targetElement, data) {
                 .attr('height', height)
               .call(graph);
           };
+          
+          */
         }
       });
 } 

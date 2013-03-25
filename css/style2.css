@@ -221,6 +221,10 @@ body {
   padding: .1em 1em;
   text-align: center;
 }
+#data svg {
+  position: relative;
+  font-size: 0.7em;
+}
 #data ul {
   margin: 0;
   padding: 0;
@@ -228,8 +232,9 @@ body {
 }
 #data ul li {
   word-wrap: break-word;
+  padding: 0;
   list-style-type: none;
-  width: 42%;
+  width: 90%;
   margin: 1em;
   border-radius: 0.2em;
   display: inline-block;
@@ -297,6 +302,7 @@ body {
  * HTML CSS
  */
 .chartWrap {
+  position: relative;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -304,6 +310,9 @@ body {
 /********************
  * TOOLTIP CSS
  */
+.nvtooltip {
+  margin-top: 50px;
+}
 .nvtooltip {
   position: absolute;
   background-color: #ffffff;
@@ -315,9 +324,9 @@ body {
   transition: opacity 500ms linear;
   -moz-transition: opacity 500ms linear;
   -webkit-transition: opacity 500ms linear;
-  transition-delay: 500ms;
-  -moz-transition-delay: 500ms;
-  -webkit-transition-delay: 500ms;
+  transition-delay: 100ms;
+  -moz-transition-delay: 100ms;
+  -webkit-transition-delay: 100ms;
   -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
