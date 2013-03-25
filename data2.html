@@ -208,26 +208,30 @@
         <h1>Data Breakdown</h1>
         <ul id="fact-boxes">
             <li id="beat-breakdown">
-                <h3>Homicides / Incidents <strong>stacked bar chart</strong> per police beat</h3>
-            </li>
-            
-            <li id="hour-breakdown">
-                <h3>Incident per hour breakdown <strong>bar chart</strong></h3>
-                <svg class="chart"></svg>
-            </li>
-            
-            <li id="weekday-breakdown">
-                <h3>Incident per weekday <strong>bar chart / pie chart?</strong></h3>
+                <h3>Incidents per police beat</h3>
                 <svg class="chart"></svg>
                 
             </li>
             
-            <li id="time-day-mostshootings">
-                <h3 >Time of day / Day of week with most shootings <strong>text</strong></h3>
+            <li id="hour-breakdown">
+                <h3>Incident per hour</h3>
+                <svg class="chart"></svg>
             </li>
             
-            <li id="injury-percentage">
+            <li id="weekday-breakdown">
+                <h3>Incident per weekday</h3>
+                <svg class="chart"></svg>
+                
+            </li>
+            
+            <li id="injury-percentage" class="small-fact">
                 <h3>Percentage of incidents that end in injury <strong>pie chart</strong></h3>
+                <svg class="chart"></svg>                
+            </li>
+            
+            
+            <li id="time-day-mostshootings">
+                <h3 >Time of day / Day of week with most shootings <strong>text</strong></h3>
             </li>
             
             <li>
@@ -741,6 +745,55 @@ $(document).ready(function(){
 <script type="text/javascript" charset="utf-8">
 
 
+
+var makePieChart = function makePieChart(targetElement, data) {
+    
+    console.log("piedata", data)
+    
+    var pieData = []
+    
+    pieData = [
+        {
+            key: "Injuries"
+            ,y: parseInt(data.TRUE)
+        }
+        ,{
+            key: "No injuries"
+            ,y: parseInt(data.FALSE)
+        }
+    ]
+
+    var chart;
+    nv.addGraph(function() {
+ 
+        $targetElement = $(targetElement)
+
+        var width = $targetElement.width(),
+        height = $targetElement.height();
+  
+
+
+        chart = nv.models.pieChart()
+            .x(function(d) { return d.key })
+            .y(function(d) { return d.y })
+            //.showLabels(false)
+            .values(function(d) { return d })
+            .color(d3.scale.category10().range())
+            //.width(width)
+            //.height(height);
+
+          d3.select(targetElement+" .chart")
+              .datum([pieData])
+            .transition().duration(1200)
+              .attr('width', width)
+              .attr('height', height)
+              .call(chart);
+
+        return chart;
+    });
+
+
+}
 var makeBarChart = function makeBarchart(targetElement, data) {
 
     $targetElement = $(targetElement)
@@ -773,8 +826,6 @@ var makeBarChart = function makeBarchart(targetElement, data) {
               .x(function(d){ return d.label })
               .y(function(d){ return d.value })              
               
-          
-          console.log("dbd", dataBreakdown)
           
           d3.select(targetElement+" .chart")
             .attr('width', width)
@@ -861,18 +912,15 @@ d3.csv('https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdHZoYWM5UklxaXI
       count.dayBreakdown = _.countBy(_json, function(d){  return moment(d.DATE + " " + d.Year, "MMMM DD YYYY" ).format("ddd"); })
       
       
-      $("#beat-breakdown").text(JSON.stringify(count.beat))
-      //$("#hour-breakdown").text(JSON.stringify(count.hourBreakdown))
-      //$("#weekday-breakdown").text(JSON.stringify(count.dayBreakdown))     
-      $("#injury-percentage").text(JSON.stringify(count.injuries))
-      
-      
-      
       console.log("COUNT!", count)
       
       makeBarChart("#hour-breakdown", count.hourBreakdown)
 
       makeBarChart("#weekday-breakdown", count.dayBreakdown)
+      
+      makeBarChart("#beat-breakdown", count.beat)
+      
+      makePieChart("#injury-percentage", count.injuries)
       
       
     })

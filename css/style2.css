@@ -240,7 +240,10 @@ body {
   padding: 0.5em;
 }
 #data ul li svg {
-  height: 220px;
+  height: 250px;
+}
+#data ul li.small-fact {
+  width: 21%;
 }
 .leaflet-popup-content {
   font-size: 0.9em;
