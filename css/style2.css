@@ -364,6 +364,7 @@ body {
 /********************
  * SVG CSS
  */
+/*
 svg {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -371,18 +372,20 @@ svg {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  /* Trying to get SVG to act like a greedy block in all browsers */
-
   display: block;
-  width: 100%;
-  height: 100%;
+  width:100%;
+  height:100%;
 }
+
+
 svg text {
   font: normal 12px Arial;
 }
+
 svg .title {
-  font: bold 14px Arial;
+ font: bold 14px Arial;
 }
+*/
 .nvd3 .nv-background {
   fill: white;
   fill-opacity: 0;
