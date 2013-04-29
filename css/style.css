@@ -2,16 +2,31 @@ html {
   height: 100%;
   height: 100%;
 }
-body {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Gudea', sans-serif;
+}
+body {
+  font-family: 'Volkhov', 'Georgia', serif;
+  font-weight: 400;
   font-size: 100%;
-  line-height: 1.4em;
+  line-height: 1.5em;
   overflow-x: hidden;
   width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
   background-color: #f4f4f4;
+}
+@media only screen and (max-width: 767px) {
+  body {
+    font-size: 0.8em;
+    line-height: 1.3em;
+  }
 }
 #section1 {
   width: 100%;
@@ -46,8 +61,6 @@ body {
   margin-left: -20%;
 }
 #map-story {
-  font-size: 0.9em;
-  line-height: 1.4em;
   position: absolute;
   right: 12px;
   bottom: 38px;
@@ -67,7 +80,7 @@ body {
     background-image: radial-gradient(50% 0%, rgb(77, 77, 77), rgb(33, 33, 33));
     */
 
-  background-color: #2f2f2f;
+  background-color: rgba(8, 8, 8, 0.88);
   color: #f1f1f1;
 }
 #map-story .hidden-step {
@@ -104,6 +117,12 @@ body {
 #map-story #stepper-sections a:visited {
   color: white;
   font-weight: bold;
+}
+@media only screen and (max-width: 767px) {
+  #map-story {
+    max-width: 176px;
+    bottom: 60px;
+  }
 }
 #intro {
   padding: 8px;
@@ -157,8 +176,20 @@ body {
   width: 100%;
   height: auto;
 }
+@media only screen and (max-width: 767px) {
+  #left-map-menu,
+  #right-map-menu {
+    bottom: 8%;
+    width: 88px;
+  }
+  #left-map-menu {
+    display: none;
+  }
+}
 #left-map-menu {
   left: 6px;
+  max-height: 64%;
+  overflow-y: auto;
   -webkit-box-shadow: 0px 0px 12px 0px rgba(25, 25, 25, 0.45);
   box-shadow: 0px 0px 12px 0px rgba(25, 25, 25, 0.45);
 }
@@ -216,6 +247,13 @@ body {
   -webkit-box-shadow: 0px 0px 6px 0px rgba(25, 25, 25, 0.15);
   box-shadow: 0px 0px 6px 0px rgba(25, 25, 25, 0.15);
 }
+#data #data-intro {
+  font-size: 1.2em;
+  line-height: 1.5em;
+  max-width: 724px;
+  width: 60%;
+  margin: 0 auto;
+}
 #data h1,
 #data h2,
 #data h3,
@@ -234,14 +272,16 @@ body {
 }
 #data ul li {
   word-wrap: break-word;
-  padding: 0;
+  padding: 0 12px;
+  background-color: #f9f9f9;
   list-style-type: none;
   width: 90%;
   margin: 1em;
   border-radius: 0.2em;
   display: inline-block;
   vertical-align: top;
-  border: 1px solid #999;
+  border: 1px solid #c2c2c2;
+  box-shadow: 0 1px 12px 0 rgba(15, 15, 15, 0.2);
 }
 #data ul li h2 {
   padding: 0.5em;
@@ -264,6 +304,23 @@ body {
 }
 .leaflet-popup-content .victim-names {
   font-weight: bold;
+}
+@media only screen and (max-width: 767px) {
+  .leaflet-popup-content {
+    color: black;
+    font-size: 0.75em;
+    line-height: 1em;
+  }
+  .leaflet-popup-content .victim-address {
+    font-weight: bold;
+    font-style: italic;
+  }
+  .leaflet-popup-content .detailed-description {
+    display: none;
+  }
+  .leaflet-popup-content .victim-names {
+    font-weight: bold;
+  }
 }
 .isotope,
 .isotope .isotope-item {

@@ -26,6 +26,8 @@
     <script src="js/nv.d3.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/src/utils.js" type="text/javascript" charset="utf-8"></script>
     
+    
+    
     <!-- ><link href="css/bootstrap-responsive.css" rel="stylesheet"> -->
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -34,9 +36,12 @@
     <![endif]-->
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+    <script src="js/sStepper.js" type="text/javascript" charset="utf-8"></script>
     
     
-    <link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic' rel='stylesheet' type='text/css'>
+<!--    <link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic' rel='stylesheet' type='text/css'> -->
+    <link href='http://fonts.googleapis.com/css?family=Gudea:700|Volkhov:400,400italic,700' rel='stylesheet' type='text/css'>
+
   </head>
 
   <body>
@@ -86,90 +91,24 @@
                 </script>
 
 			</div>
-		
-        <!-- 
-		<div class="row-fluid">
-			<div class="span3 topicstory">
-				<h3>The Killings</h3>
-				<img src="http://placehold.it/350x250" />
-			</div>
-			<div class="span3 topicstory">
-				<h3>The Trauma</h3>
-				<img src="http://placehold.it/350x250" />
-			</div>
-			<div class="span3 topicstory">
-				<h3>The Solutions</h3>
-				<img src="http://placehold.it/350x250" />
-			</div>
-			<div class="span3 topicstory">
-				<h3>The Data</h3>
-				<img src="http://placehold.it/350x250" />
-			</div>			
-		</div>
-        -->
         
         <div id="map-story">
             <div id="sStepper">
                 <div id="stepper-sections">
                     <div class="stepper-section" data-enter-callback="window.map.panTo([37.781027,-122.22393]); window.map.setZoom(12);" >
                         <h2>Shine in Peace</h2>
-                        Introductory text. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </div>
-                    <div class="stepper-section" data-enter-callback="window.map.panTo([37.805427,-122.272596]); window.map.setZoom(14);">
-                        <h2>Downtown</h2>
-                        <a href="#" 
-                        data-lat="37.805427" 
-                        data-lng="-122.272596">Downtown
-                        </a>
-                         dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                         <p><strong>See more stories from this neighborhood</strong></p>
-                    </div>
-                    
-                    <div class="stepper-section" data-enter-callback="window.map.panTo([37.822701,-122.271481]); window.map.setZoom(15);">
-                        <h2>Uptown</h2>
-                        <a href="#" 
-                        data-lat="37.822701" 
-                        data-lng="-122.271481">Uptown
-                        </a>
-                         dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                         <p><strong>See more stories from this neighborhood</strong></p>
-                    </div>
-            
-                    <div class="stepper-section" data-enter-callback="window.map.panTo([37.748729,-122.175522]); window.map.setZoom(14);">
-                        <h2>West Oakland</h2>
-                        <a href="#" 
-                        data-lat="37.748729" 
-                        data-lng="-122.175522">West Oakland
-                        </a>
-                         dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                         <p><strong>See more stories from this neighborhood</strong></p>
+                        <p>
+                            Gang injunction zones are highlighted in yellow. By clicking "Next" you can see the locations and stories of the 10 most recent murders. 
+                        </p>
                     </div>
                     
                     
-                    <div class="stepper-section" 
-                    data-enter-callback="
-                    window.toggleHexmap(); 
-                    window.togglePoints(); 
-                    
-                    window.map.panTo([37.781027,-122.22393]); 
-                    window.map.setZoom(12)" 
-                    data-exit-callback="window.toggleHexmap();         window.togglePoints(); ">
-                        <h2>Hexmap</h2>
-                        This hexmap shows concentrations of victims. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                    <script id="stepperSectionTemplate" type="text/html">
+                    <div class="stepper-section" data-enter-callback="{{enterCallback}}" data-exit-callback="{{exitCallback}}">
+                    <h3>{{title}}</h3>
+                    On {{formattedDate}} {{victims}}  killed at {{address}}.
                     </div>
-                    
-                    
-                    <div class="stepper-section" data-enter-callback="window.map.panTo([37.781027,-122.22393]); window.map.setZoom(12); map.removeLayer(window.shootingLayer); map.removeLayer(window.injuryLayer);" data-exit-callback="map.addLayer(window.shootingLayer); map.addLayer(window.injuryLayer);">
-                        <h2>Just homicides</h2>
-                        Only show homicide points on map. 
-                    </div>
-                    
-                    <div class="stepper-section"
-                    
-                    data-exit-callback="window.scrollToData()">
-                        <h2>Look at our data!</h2>
-                        
-                    </div>
+                    </script>                
                     
                     
                 </div>
@@ -189,8 +128,8 @@
         <div id="left-map-menu">
             <h3>Map Options</h3>
             <ul id="category-list">
-                <li class="active" id="points">Points<img src="img/map.points.png" alt="Map.Points"></li>
-                <li id="hex">Victim heatmap<img src="img/map.hex.png" alt="Map.Hex"></li>
+                <li class="active" id="points">Points <!-- <img src="img/map.points.png" alt="Map.Points"> --></li>
+                <li id="hex">Victim heatmap <!-- <img src="img/map.hex.png" alt="Map.Hex"> --> </li>
             </ul>
         </div>
         
@@ -208,20 +147,27 @@
     
     <div id="data" class="section section2">        
         <h1>Data Breakdown</h1>
+        
+        <div id="data-intro">
+            <h3>There have been <span id="total-incidents">?</span> total shooting incidents this year.</h3>
+            <p>
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+            </p>
+        </div>
         <ul id="fact-boxes">            
             <li id="hour-breakdown">
-                <h3>Incident per hour</h3>
+                <h3>Total incidents per hour</h3>
                 <svg class="chart"></svg>
             </li>
             
             <li id="weekday-breakdown">
-                <h3>Incident per weekday</h3>
+                <h3>Total incidents per weekday</h3>
                 <svg class="chart"></svg>
                 
             </li>
 
             <li id="beat-breakdown">
-                <h3>Incidents per police beat</h3>
+                <h3>Total incidents per police beat</h3>
                 <svg class="chart"></svg>
                 
             </li>
@@ -232,9 +178,11 @@
             </li>
             
             
+            <!--
             <li id="time-day-mostshootings">
                 <h3 >Time of day / Day of week with most shootings <strong>text</strong></h3>
             </li>
+            
             
             <li>
                 <h3>Number of victims / number of victims younger than 18 <strong>bar chart</strong></h3>
@@ -243,6 +191,7 @@
             <li>
                 <h3>Average victims per incident <strong>(bar chart)</strong></h3>
             </li>
+            -->
         </ul>
     </div>
     
@@ -283,10 +232,14 @@ var homicide = []
 ,shooting = []
 ,everything = []
 
-window.dotsColored = true
+window.dotsColored = false
 
+window.dataGoogleDoc = 'https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdHZoYWM5UklxaXI4bEpqS3cta1hid1E&output=csv';
 
-                d3.csv('https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dGNLVEJoWGthSmJvUVgyOG5YeW9ZN2c&single=true&gid=0&output=csv', function(error, _json){ showInfo(_json) })
+                //d3.csv('https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dGNLVEJoWGthSmJvUVgyOG5YeW9ZN2c&single=true&gid=0&output=csv', function(error, _json){ showInfo(_json) })
+
+//
+d3.csv(window.dataGoogleDoc, function(error, _json){ showInfo(_json) })
 	        
     function mapNewPoint(pointData){   
         
@@ -298,22 +251,25 @@ window.dotsColored = true
         var shootPop = ich.shootPop(pointData, true);  
         
         // Create a color based on the date (in UNIX format)
-        var pntColor = colorScale(pointData.unix)                
+        var pntColor = dateColorScale(pointData.unix)                
                 
 		//place points
 		if (pointData.homicidetag == "TRUE"){                       
             var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
-            point = new L.circle(pntLatLng, 200, {
+            
+            var h_pntSize = 120;
+            
+            point = new L.circle(pntLatLng, h_pntSize, {
                 color: "red",
                 stroke: false,
-                fillOpacity: 0.8
+                fillOpacity: 0.75
                         
             })
             
-            colorPoint = new L.circle(pntLatLng, 200, {
+            colorPoint = new L.circle(pntLatLng, h_pntSize, {
                 color: pntColor,
                 stroke: false,
-                fillOpacity: 0.8
+                fillOpacity: 0.75
                         
             })
             
@@ -335,15 +291,18 @@ window.dotsColored = true
 		}
 		else if (pointData.shootinjurytag == "TRUE") {
                         
+                        
+            var si_pntSize = 90;
+                        
             var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
-            point = new L.circle(pntLatLng, 100, {
+            point = new L.circle(pntLatLng, si_pntSize, {
                 color: '#7D010C',
                 weight: 0,
                 fillOpacity: 0.5                        
             })
 
 
-            colorPoint = new L.circle(pntLatLng, 100, {
+            colorPoint = new L.circle(pntLatLng, si_pntSize, {
                 color: pntColor, //'#7D010C',
                 weight: 0,
                 fillOpacity: 0.5                        
@@ -358,15 +317,16 @@ window.dotsColored = true
 		}
 		else if (pointData.shoottag == "TRUE") {            
                                   
+            var s_pntSize = 72;
             var pntLatLng = new L.LatLng(pointData.lat, pointData.lng)
-            point = new L.circle(pntLatLng, 75, {
+            point = new L.circle(pntLatLng, s_pntSize, {
                 color: '#2A0004',
                 stroke: false,
                 fillOpacity: 0.45
                         
             })
             
-            colorPoint = new L.circle(pntLatLng, 75, {
+            colorPoint = new L.circle(pntLatLng, s_pntSize, {
                 color: pntColor,
                 stroke: false,
                 fillOpacity: 0.45
@@ -439,9 +399,9 @@ window.dotsColored = true
         // Create our color scale based on the earliest/most recent
         // dates found in our data
         // and scales them between black (oldest) and red (most recent)
-        colorScale = d3.scale.linear()
+        dateColorScale = d3.scale.linear()
         .domain([d3.min(eventDates), d3.max(eventDates)])
-        .range(["white", "black"])
+        .range(["#D44517", "#470701"])
                 
                 
                 
@@ -477,7 +437,105 @@ window.dotsColored = true
             collapsed: false,
             position: 'topleft'
         }))
-                       
+              
+              
+              
+        // Data stuff
+        
+
+        _json = data;
+        console.log(_json[0])      
+      
+        var count = {}
+      
+        count.shootings = _json.length
+      
+        count.beat = _.countBy(_json, function(d){ return d.BEAT })
+      
+        count.desc = _.countBy(_json, function(d){ return d.DESCRIPTION })
+      
+        count.homicides = _.countBy(_json, function(d){ return d.HomicideTag })
+      
+        count.injuries = _.countBy(_json, function(d){ return d.ShootInjuryTag })
+      
+        count.hourBreakdown = _.countBy(_json, function(d){ return moment(d.TIME, "h:m A" ).format("HH"); })
+        count.hourBreakdown = _.sortBy(count.hourBreakdown, function(hour) {
+            //return hour
+        })
+        count.hourBreakdownMax = _.max(count.hourBreakdown, function(hour) { return hour; })
+      
+      
+        //console.log("hour breakdown", count.hourBreakdown, "max", count.hourBreakdownMax)
+      
+        count.dayBreakdown = _.countBy(_json, function(d){  return moment(d.DATE + " " + d.Year, "MMMM DD YYYY" ).format("ddd"); })
+        console.log("dayBD", count.dayBreakdown)
+      
+      
+        //console.log("count day breakdown", count.dayBreakdown)
+
+      
+        //console.log("COUNT!", count)
+        
+        $("#total-incidents").text(count.shootings)
+      
+        makeBarChart("#hour-breakdown", count.hourBreakdown)
+
+        makeBarChart("#weekday-breakdown", count.dayBreakdown)
+        
+      
+        makeBarChart("#beat-breakdown", count.beat)
+      
+        makePieChart("#injury-percentage", count.injuries)
+        
+
+        
+        
+        
+        // Create stepper items
+      
+        var filteredData = {}
+        
+        filteredData.homicides = _.filter(_json, function(d) {
+            if(d.HomicideTag == "TRUE"){ 
+                return true;
+            }
+            else {
+                return false;
+            }
+        }).reverse();
+        
+        _.each(filteredData.homicides.slice(0, 10), function(d) {
+            
+            var $stepper = $("#sStepper #stepper-sections");        
+            
+            var dateFormat2 = moment(d.DATE + " " + d.Year, "MMMM D YYYY" ).format("MMM Do")
+                
+            
+            var stepperSectionData = {
+                title: d.Victims
+                ,enterCallback: "window.map.panTo(["+d.LATITUDE+","+d.LONGITUDE+"]); window.map.setZoom(15)"
+                ,exitCallback:  ""
+                ,lat: d.LATITUDE
+                ,lng: d.LONGITUDE
+                ,address: d.ADDRESS
+                ,dateTime: d.TIME + " " + d.DATE + " " + d.Year
+                ,formattedDate: dateFormat2
+                ,victims: d.Victims
+            
+            }
+            
+            var newStep = $(ich.stepperSectionTemplate(stepperSectionData, true));
+            //console.log(newStep.html())
+            
+            $stepper.append(newStep)
+            
+        
+        })
+        
+        sStepper.init("#sStepper");
+        
+
+        
 	}
 	
     
@@ -492,9 +550,10 @@ var map = window.map = L.map('map',{
     scrollWheelZoom: false
 })
 
-map.attributionControl.addAttribution("Data Journalism by John Osborn");
+map.attributionControl.addAttribution("Data Journalism by John C. Osborn");
 
-var layer = new L.StamenTileLayer("toner-lite");
+//var layer = new L.StamenTileLayer("toner-lite");
+var layer = new L.StamenTileLayer("terrain");
 map.addLayer(layer);        
         
         
@@ -503,6 +562,30 @@ var layer3 = new L.StamenTileLayer("toner-lines");
         
 var layer2 = new L.StamenTileLayer("toner-labels");
 //map.addLayer(layer2);
+
+
+d3.json("data/GangInjunctionZones.geojson", function(geojson){ 
+    
+    function onEachFeature(feature, layer) {
+        // does this feature have a property named popupContent?
+        if (feature.properties && feature.properties.popupContent) {
+            layer.bindPopup(feature.properties.popupContent);
+        }
+    }  
+  
+    var myLayer = L.geoJson(geojson, {
+        
+        onEachFeature: onEachFeature
+        ,style: {
+            color: "yellow"
+            ,opacity: 0.35
+        }
+    }).addTo(map);
+    
+    
+  
+    
+})
 
 
 // TODO: I am trying to figure out how to toggle coloring
@@ -519,24 +602,9 @@ window.toggleDotColors = function toggleDotColors(){
 }
 
 $("#dot-color-toggle").click(function(){
-    toggleDotColors();
+    window.toggleDotColors();
 })
 
-
-/*
-$("#section2 a").click(function(){
-    var center = {}
-    
-    center.lat = $(this).attr("data-lat")
-    ,center.lng = $(this).attr("data-lng")
-    
-    //alert(center.lat + " " + center.lng)
-    
-    map.panTo([center.lat, center.lng])
-    map.setZoom(14)
-
-})
-*/
 
 // Logic for the left menu
 $('#category-list li').click( function(){
@@ -597,12 +665,17 @@ window.togglePoints = function togglePoints() {
 
 
 
+    
+
 /* Hexmap stuff */
 var svg = d3.select(map.getPanes().overlayPane).append("svg"),
     g = svg.append("g").attr("class", "leaflet-zoom-hide");
     
     // Initially hide the hexmap, we'll have a button to show it
     g.style("display", "none").attr("id", "hexmap")
+    
+    
+
     
 d3.json("data/oakland_victims.geojson", function(collection){    
     makeHexBin(collection);
@@ -735,25 +808,13 @@ window.scrollToData = function scrollToData() {
         }
     }
 
-</script>
 
-<script src="js/sStepper.js" type="text/javascript" charset="utf-8"></script>
-    
-<script type="text/javascript" charset="utf-8">
-$(document).ready(function(){      
-        
-    sStepper.init("#sStepper");  
-
-})
-</script>
-
-<script type="text/javascript" charset="utf-8">
 
 
 
 var makePieChart = function makePieChart(targetElement, data) {
     
-    console.log("piedata", data)
+    //console.log("piedata", data)
     
     var pieData = []
     
@@ -811,25 +872,11 @@ var makeBarChart = function makeBarchart(targetElement, data) {
         generate: function() {
             
         dataBreakdown = data
-        console.log("DATA", data)
-        
-        console.log(dataBreakdown)
-        
-        // TODO: Find a better way to sort that doesn't fuck up the objects
-        /*
-        dataBreakdown = _.sortBy(dataBreakdown, function(row,i){
-            if(targetElement == "#beat-breakdown") {
-                return -row
-            }
-            else {
-                return i
-            }
-        })
-        */
+
         dataBreakdown = _.map(dataBreakdown, function(row, i){
             
             if(targetElement == "#hour-breakdown") {
-                console.log("ROW", row)
+                //console.log("ROW", row)
                 var ourHour = moment(i.toString(), "H")
                 
                 i = ourHour.format("ha")
@@ -923,46 +970,12 @@ var makeBarChart = function makeBarchart(targetElement, data) {
       });
 } 
 
-
-
-
-// Data / stats stuff
-
-d3.csv('https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdHZoYWM5UklxaXI4bEpqS3cta1hid1E&output=csv', function(error, _json){
-        
-      console.log(_json[0])
-      
-      
-      var count = {}
-      
-      count.shootings = _json.length
-      
-      count.beat = _.countBy(_json, function(d){ return d.BEAT })
-      count.desc = _.countBy(_json, function(d){ return d.DESCRIPTION })
-      count.homicides = _.countBy(_json, function(d){ return d.HomicideTag })
-      count.injuries = _.countBy(_json, function(d){ return d.ShootInjuryTag })
-      count.hourBreakdown = _.countBy(_json, function(d){ return moment(d.TIME, "h:m A" ).format("HH"); })
-      count.dayBreakdown = _.countBy(_json, function(d){  return moment(d.DATE + " " + d.Year, "MMMM DD YYYY" ).format("ddd"); })
-      
-      
-      console.log("COUNT!", count)
-      
-      makeBarChart("#hour-breakdown", count.hourBreakdown)
-
-      makeBarChart("#weekday-breakdown", count.dayBreakdown)
-      
-      makeBarChart("#beat-breakdown", count.beat)
-      
-      makePieChart("#injury-percentage", count.injuries)
-      
-      
-    })
-    
-    
    
 
 </script>
 	
+    
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 	
 
   </body>
