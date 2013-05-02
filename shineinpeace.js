@@ -126,11 +126,10 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
 
 
     function loadGeoJSONLayers(_json) {
-        var gangInjunctionZonesLayer
+        
+        // Gang injunction zones
         d3.json("data/GangInjunctionZones.geojson", function(geojson){ 
-
             function onEachFeature(feature, layer) {
-                // does this feature have a property named popupContent?
                 if (feature.properties && feature.properties.popupContent) {
                     layer.bindPopup(feature.properties.popupContent);
                 }
@@ -144,7 +143,8 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
                 }
             }).addTo(map);
         
-            var oakPoliceBeats
+        
+            // Oakland Police Beats
             d3.json("data/oak_policebeats.geojson", function(geojson){ 
                 function onEachFeature(feature, layer) { layer.bindPopup(feature.properties.Name); }  
 
@@ -161,9 +161,28 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
                     }
                 })//.addTo(map);        
                 
-                showInfo(_json)
+                d3.json("data/oak_citycouncildistricts.geojson", function(geojson){ 
+                    function onEachFeature(feature, layer) { console.log("feature", feature); layer.bindPopup(feature.properties.Name); }  
+
+                    window.oakCouncilDistricts = L.geoJson(geojson, {
+                        onEachFeature: onEachFeature
+    
+                        ,style: {
+                            color: "red"
+                            ,fillColor: "#999"
+                            ,opacity: 0.6
+                            ,fillOpacity: 0.35
+                            ,stroke: "black"  
+                            ,weight: 2          
+                        }
+                    })//.addTo(map);        
+                
+                    showInfo(_json)                
+                })
                 
             })
+            
+
     
         })
     
@@ -257,9 +276,10 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
         var overlayMarkers = {
             "OPD Police Beats": window.oakPoliceBeats                             
             ,"Homicides": homicideLayer
-            ,"Injuries": injuryLayer
+            ,"Shootings with injuries": injuryLayer
             ,"Shootings": shootingLayer
             ,"Gang Injunction Zones": window.gangInjunctionZones
+            ,"City Council Districts": window.oakCouncilDistricts
             }
                 
                 
