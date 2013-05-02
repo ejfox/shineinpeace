@@ -157,7 +157,7 @@ body {
 #right-map-menu {
   z-index: 999999;
   font-size: 0.8em !important;
-  width: 16%;
+  max-width: 16%;
   position: absolute;
   bottom: 4%;
   border-radius: 4px;
