@@ -88,6 +88,9 @@ body {
 }
 #map-story #stepper-nav {
   padding: 0;
+  margin-left: auto;
+  width: 150px;
+  text-align: center;
 }
 #map-story #stepper-nav li {
   color: white;
