@@ -275,6 +275,7 @@ body#homepage #header #more-info {
   display: inline-block;
   position: absolute;
   right: 0;
+  text-align: right;
 }
 body#homepage #header #more-info p {
   margin: 0;
