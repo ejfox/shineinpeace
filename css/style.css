@@ -83,6 +83,9 @@ body {
   background-color: rgba(8, 8, 8, 0.88);
   color: #f1f1f1;
 }
+#map-story .victim-names {
+  color: red;
+}
 #map-story .hidden-step {
   display: none;
 }
