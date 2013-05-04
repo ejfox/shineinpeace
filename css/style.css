@@ -88,9 +88,6 @@ body {
 }
 #map-story #stepper-nav {
   padding: 0;
-  margin-left: auto;
-  width: 150px;
-  text-align: center;
 }
 #map-story #stepper-nav li {
   color: white;
@@ -249,6 +246,67 @@ body {
 #category-list .active img {
   -webkit-box-shadow: 0px 0px 6px 0px rgba(25, 25, 25, 0.15);
   box-shadow: 0px 0px 6px 0px rgba(25, 25, 25, 0.15);
+}
+/* Homepage styles */
+body#homepage {
+  font-size: 1.2em;
+  line-height: 1.5em;
+}
+body#homepage .container-fluid {
+  position: relative;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+body#homepage #header {
+  position: relative;
+  margin-bottom: 24px;
+}
+body#homepage #header h1 {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 5em;
+  margin: 0;
+  line-height: 1em;
+}
+body#homepage #header #more-info {
+  margin-top: 0.4em;
+  line-height: 1.2em;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+body#homepage #header #more-info p {
+  margin: 0;
+  margin-top: 0.4em;
+}
+body#homepage #project-intro {
+  display: inline-block;
+  vertical-align: top;
+  width: 35%;
+  max-width: 340px;
+}
+body#homepage #big-link {
+  width: 60%;
+  height: auto;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 1em;
+  margin-bottom: 48px;
+  position: absolute;
+  right: 0;
+}
+body#homepage #big-link img {
+  width: 100%;
+  height: auto;
+}
+body#homepage footer {
+  margin-top: 32px;
+  width: 100%;
+  padding: 0.8em;
+  margin: 0;
+  bottom: 0;
+  left: 0;
 }
 #data #data-intro {
   font-size: 1.2em;

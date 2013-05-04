@@ -50,192 +50,47 @@
 
   </head>
 
-  <body>
-    <div class="container-fluid" id="data-container">
-	    <div id="section1">
-			<div id="map">
-                <h2 id="loading">Loading....</h2>
-                
-                <script id="homicidePop" type="text/html">
-                <h2>Homicide on {{date2}}</h2>
-                <div><strong class="victim-names">{{victims}}</strong> killed {{date}} at {{time}}</div>
-                <div>Reported victims: <span class="number-of-victims">{{noofvictims}}</span></div>
-                <div class="victim-address">{{address}}</div>
-                <div class="detailed-description">
-                    I am a detailed description of the event. Track through OPD with RD# {{rdNumber}}
-                </div>
-                </script>
-                
-                <script id="injuryPop" type="text/html">
-                <h2>Shooting with Injury on {{date2}}</h2>
-                <div>Reported victims: <span class="number-of-victims">{{noofvictims}}</span></div>
-                <div>{{date}} at {{time}}</div>
-                <div class="victim-address">{{address}}</div>
-                <div class="detailed-description">
-                    I am a detailed description of the event. Track through OPD with RD# {{rdNumber}}
-                </div>
-                </script>
-                
-                <script id="noInjuryPop" type="text/html">
-                <h2>Shooting with No Injury on {{date2}}</h2>
-                <div>Reported victims: <span class="number-of-victims">{{noofvictims}}</span></div>
-                <div>{{date}} at {{time}}</div>
-                <div class="victim-address">{{address}}</div>
-                <div class="detailed-description">
-                    I am a detailed description of the event. Track through OPD with RD# {{rdNumber}}
-                </div>
-                </script>
-                
-                <script id="shootPop" type="text/html">
-                <h2>Shooting on {{date2}}</h2>
-                <div>Reported victims: <span class="number-of-victims">{{noofvictims}}</span></div>
-                <div>{{date}} at {{time}}</div>
-                <div class="victim-address">{{address}}</div>
-                <div class="detailed-description">
-                    I am a detailed description of the event. Track through OPD with RD# {{rdNumber}}
-                </div>
-                </script>
-
-			</div>
-        
-        <div id="map-story">
-            <div id="sStepper">
-                <div id="stepper-sections">
-                    <div class="stepper-section" data-enter-callback="window.map.panTo([37.781027,-122.22393]); window.map.setZoom(12);" >
-                        <h2>Shine in Peace</h2>
-                        <p>
-                            Gang injunction zones are highlighted in yellow. By clicking "Next" you can see the locations and stories of the 10 most recent murders. 
-                        </p>
-                    </div>
-                    
-                    
-                    <script id="stepperSectionTemplate" type="text/html">
-                    <div class="stepper-section" data-enter-callback="{{enterCallback}}" data-exit-callback="{{exitCallback}}">
-                    <h3>{{title}} <small>{{formattedDate}}</small></h3>
-                    <p><strong>{{victims}}</strong>  killed at {{address}}.</p>
-                    <p>{{stepper}}</p>
-                    </div>
-                    </script>                
-                    
-                    
-                </div>
-                
-
-
-                
-                <ul id="stepper-nav">
-                    <li href="#prev" class="stepper-prev">Prev</li>
-                    <li href="#next" class="stepper-next">Next</li>
-                </ul>        
-            </div>        
-        </div>     
-        
-        
-        
-        <div id="left-map-menu">
-            <h3>Map Options</h3>
-            <ul id="category-list">
-                <li class="active" id="points">Points <!-- <img src="img/map.points.png" alt="Map.Points"> --></li>
-                <li id="hex">Victim heatmap <!-- <img src="img/map.hex.png" alt="Map.Hex"> --> </li>
-            </ul>
-        </div>
-        
-        <div id="right-map-menu">
-            <div id="map-incidents">
-                <h3>Filter Map</h3>
-                <ul class="nav nav-pills nav-stacked">
-                    <li><a href="#">Homicides</a></li>
-                    <li><a href="#">Shootings with injuries</a></li>
-                    <li><a href="#">Shootings with no injuries</a></li>
-                </ul>
-            </div>
-        </div>        
-    </div>
+<body id="homepage">
+<div class="container-fluid">
     
-    <div id="data" class="section section2">        
-        <h1>Data Breakdown</h1>
-        
-        <div id="data-intro">
-            <h3>There have been <span id="total-incidents">?</span> total shooting incidents this year.</h3>
-            <p>
-                To understand how gun violence works in Oakland, we must understand the broader context. This map only paints one part of that picture, and it's a work in progress.
-            </p>
-
-                <p>The vast majority of our data is gathered from the Oakland Police Department and only represents shootings reported to the police -- in some cases, victims of gun violence do not wish to talk with police, and as such there are gaps in our demographic data.</p>
-
-                <p>There are also occasions where this data is collected from first-hand accounts and news reports.</p> 
-
-                <p>You can toggle different layers for comparison, such as city council districts, Oakland Police Department beats, and areas with gang injunctions. You can also toggle between homicides, shootings with confirmed injuries, and reported shootings.</p>
-
-                <p>We've chosen to include officer-involved shootings in our data set, so killings deemed justified do show up here under the "homicide" map layer. The "shootings with injuries" layer only includes incidents where we have confirmed that victims were hurt, but doesn’t necessarily mean other shootings had no victims.</p>
-
-                <p>The map updates as quickly as new details are provided, and victim data is updated as quickly as we can get it. This data doesn't represent all shootings in Oakland -- it's only the floor, a bare minimum. There are likely many more incidents that go unreported. But even if this data were complete, it still wouldn't tell the whole story -- for that, we must rely on the unique, individual stories of those affected by gun violence.
-            </p>
+    <div id="header">
+        <h1>Shine In Peace</h1>
+        <div id="more-info">
+            <p>An initiative of the <strong>Oakland Projects</strong></p>
+            <p><a href="mailto:editor@shineinpeace.com">editor@shineinpeace.com</a></p>
         </div>
-        <ul id="fact-boxes">            
-            <li id="hour-breakdown">
-                <h3>Total incidents per hour</h3>
-                <svg class="chart"></svg>
-            </li>
-            
-            <li id="weekday-breakdown">
-                <h3>Total incidents per weekday</h3>
-                <svg class="chart"></svg>
-                
-            </li>
-
-            <li id="beat-breakdown">
-                <h3>Total incidents per police beat</h3>
-                <svg class="chart"></svg>
-                
-            </li>
-            
-            <li id="injury-percentage" class="small-fact">
-                <h3>Percentage of incidents that end in injury <strong>pie chart</strong></h3>
-                <svg class="chart"></svg>                
-            </li>
-            
-            
-            <!--
-            <li id="time-day-mostshootings">
-                <h3 >Time of day / Day of week with most shootings <strong>text</strong></h3>
-            </li>
-            
-            
-            <li>
-                <h3>Number of victims / number of victims younger than 18 <strong>bar chart</strong></h3>
-            </li>
-            
-            <li>
-                <h3>Average victims per incident <strong>(bar chart)</strong></h3>
-            </li>
-            -->
-        </ul>
     </div>
+
+    <div id="project-intro">
+        <p><a href="data.html">Map / Data page</a> - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     
-        
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+
+    <div id="big-link">
+        <div id="image-wrapper">
+            <img src="homepage_photo.big.jpg" />
+        </div>
+    </div>
 
 
-        <footer >
-        	
-        </footer>			
+<footer>
+
+</footer>
 
 
 
+</div><!--/.fluid-container-->
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script src="shineinpeace.js" type="text/javascript" charset="utf-8"></script>
 
 
-    </div><!--/.fluid-container-->
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-    <script src="shineinpeace.js" type="text/javascript" charset="utf-8"></script>
-
-    <!--
-    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-    -->
-
-  </body>
+</body>
 </html>
