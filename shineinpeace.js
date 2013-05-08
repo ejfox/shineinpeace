@@ -127,6 +127,8 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
 
     function loadGeoJSONLayers(_json) {
         
+//        console.log("HERE'S YA JSON", _json)
+        
         // Gang injunction zones
         d3.json("data/GangInjunctionZones.geojson", function(geojson){ 
             function onEachFeature(feature, layer) {
@@ -162,7 +164,7 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
                 })//.addTo(map);        
                 
                 d3.json("data/oak_citycouncildistricts.geojson", function(geojson){ 
-                    function onEachFeature(feature, layer) { console.log("feature", feature); layer.bindPopup(feature.properties.Name); }  
+                    function onEachFeature(feature, layer) { layer.bindPopup(feature.properties.Name); }  
 
                     window.oakCouncilDistricts = L.geoJson(geojson, {
                         onEachFeature: onEachFeature
@@ -294,11 +296,31 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
               
         // Data stuff
         
+        //'https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdHZoYWM5UklxaXI4bEpqS3cta1hid1E&single=true&gid=6&output=csv'
+
+        var count = {}
+        d3.csv('https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdHZoYWM5UklxaXI4bEpqS3cta1hid1E&single=true&gid=6&output=csv', function(error, _json){ 
+//            console.log("Jay jay json", _json)
+            
+            count.race = _.countBy(_json, function(d){ return d.Race })
+            count.age = _.countBy(_json, function(d){ return d.Age })
+            count.gender = _.countBy(_json, function(d){ return d.Gender })
+            
+            makeBarChart("#race-breakdown", count.race)
+            makeBarChart("#age-breakdown", count.age)
+            
+            // Need to make the pie chart resuable, right now it's specific to injury data
+            //makePieChart("#gender-percentage", count.gender)
+            
+            
+        })
+        
 
         _json = data;
-        console.log(_json[0])      
+        //console.log(">>>",_json[0])
+        
+        //console.log("JSON", _json)  
       
-        var count = {}
       
         count.shootings = _json.length
       
@@ -320,7 +342,7 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
         //console.log("hour breakdown", count.hourBreakdown, "max", count.hourBreakdownMax)
       
         count.dayBreakdown = _.countBy(_json, function(d){  return moment(d.DATE + " " + d.Year, "MMMM DD YYYY" ).format("ddd"); })
-        console.log("dayBD", count.dayBreakdown)
+//        console.log("Count", count)
       
       
         //console.log("count day breakdown", count.dayBreakdown)
@@ -333,6 +355,8 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
         makeBarChart("#hour-breakdown", count.hourBreakdown)
 
         makeBarChart("#weekday-breakdown", count.dayBreakdown)
+        
+        
         
       
         makeBarChart("#beat-breakdown", count.beat)
