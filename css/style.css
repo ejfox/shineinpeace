@@ -252,6 +252,7 @@ body {
 }
 /* Homepage styles */
 body#homepage {
+  background-color: white;
   font-size: 1.2em;
   line-height: 1.5em;
 }
@@ -273,16 +274,26 @@ body#homepage #header h1 {
   line-height: 1em;
 }
 body#homepage #header #more-info {
+  font-size: 11px;
   margin-top: 0.4em;
   line-height: 1.2em;
   display: inline-block;
-  position: absolute;
-  right: 0;
+  position: fixed;
+  right: 4px;
   text-align: right;
+}
+@media only screen 
+and (max-width : 800px) {
+body#homepage #header #more-info {
+  display: none;
+}
 }
 body#homepage #header #more-info p {
   margin: 0;
   margin-top: 0.4em;
+}
+body#homepage img#gotomap {
+border-radius: 6px;
 }
 body#homepage #project-intro {
   display: inline-block;
@@ -290,6 +301,7 @@ body#homepage #project-intro {
   width: 35%;
   max-width: 340px;
 }
+
 body#homepage #big-link {
   width: 60%;
   height: auto;
@@ -300,6 +312,25 @@ body#homepage #big-link {
   position: absolute;
   right: 0;
 }
+
+@media only screen 
+and (max-width : 800px) {
+body#homepage #header {
+text-align: center;
+}
+body#homepage #project-intro {
+  display: block;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body#homepage #big-link {
+  width: 100%;
+}
+
+}
+
 body#homepage #big-link img {
   width: 100%;
   height: auto;
@@ -313,11 +344,21 @@ body#homepage footer {
   left: 0;
 }
 #data #data-intro {
-  font-size: 1.2em;
+  font-size: 1em;
   line-height: 1.5em;
   max-width: 724px;
-  width: 60%;
+  width: 50%;
   margin: 0 auto;
+  /*
+  display: inline-block;
+  */
+  vertical-align: top;
+}
+#fact-boxes {
+/*
+display: inline-block;
+width: 56%;
+*/
 }
 #data h1,
 #data h2,
@@ -337,7 +378,7 @@ body#homepage footer {
 }
 #data ul li {
   word-wrap: break-word;
-  padding: 0 12px;
+  /*padding: 0 12px;*/
   background-color: #f9f9f9;
   list-style-type: none;
   width: 90%;
@@ -387,6 +428,32 @@ body#homepage footer {
     font-weight: bold;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .isotope,
 .isotope .isotope-item {
   /* change duration value to whatever you like */

@@ -431,7 +431,7 @@ map.attributionControl.addAttribution("Data Journalism by John C. Osborn");
 
 
 //var layer = new L.StamenTileLayer("toner-lite");
-var layer = new L.StamenTileLayer("terrain");
+var layer = new L.StamenTileLayer("toner-lite");
 map.addLayer(layer);        
         
         
