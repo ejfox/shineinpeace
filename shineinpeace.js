@@ -276,13 +276,14 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
                       
         // Tell Leaflet what layer to include as checkboxes in the controls
         var overlayMarkers = {
-            "OPD Police Beats": window.oakPoliceBeats                             
-            ,"Homicides": homicideLayer
+            "Homicides": homicideLayer
             ,"Shootings with injuries": injuryLayer
             ,"Shootings": shootingLayer
-            ,"Gang Injunction Zones": window.gangInjunctionZones
-            ,"City Council Districts": window.oakCouncilDistricts
             }
+        
+        //     "OPD Police Beats": window.oakPoliceBeats           
+        //    ,"Gang Injunction Zones": window.gangInjunctionZones
+        //    ,"City Council Districts": window.oakCouncilDistricts
                 
                 
             // Create the control, and define collapsed as false
@@ -457,7 +458,8 @@ var osm2 = new L.TileLayer(osmUrl, {minZoom: 0
     ,unloadInvisibleTiles: true
     ,detectRetina: true});
     
-    
+ 
+/*    
 var miniMap = new L.Control.MiniMap(osm2, { 
     toggleDisplay: true
     ,position: 'topright'
@@ -465,7 +467,7 @@ var miniMap = new L.Control.MiniMap(osm2, {
     ,width: 340
     ,height: 200
     ,zoomAnimation: true }).addTo(map);
-
+*/
 
 
 
