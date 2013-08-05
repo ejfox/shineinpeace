@@ -129,6 +129,8 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
         
 //        console.log("HERE'S YA JSON", _json)
         
+        
+        /*
         // Gang injunction zones
         d3.json("data/GangInjunctionZones.geojson", function(geojson){ 
             function onEachFeature(feature, layer) {
@@ -177,17 +179,20 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
                             ,stroke: "black"  
                             ,weight: 2          
                         }
-                    })//.addTo(map);        
+                    })//.addTo(map);
+  
                 
-                    showInfo(_json)                
                 })
-                
+
             })
             
 
     
         })
-    
+                */    
+                
+                showInfo(_json)                
+                
     
     }
     
@@ -296,7 +301,6 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
               
               
         // Data stuff
-        
         //'https://docs.google.com/spreadsheet/pub?key=0AnZDmytGK63SdHZoYWM5UklxaXI4bEpqS3cta1hid1E&single=true&gid=6&output=csv'
 
         var count = {}
@@ -317,11 +321,7 @@ d3.csv(window.dataGoogleDoc, function(error, _json){ loadGeoJSONLayers(_json); }
         })
         
 
-        _json = data;
-        //console.log(">>>",_json[0])
-        
-        //console.log("JSON", _json)  
-      
+        _json = data;      
       
         count.shootings = _json.length
       
@@ -565,7 +565,7 @@ var svg = d3.select(map.getPanes().overlayPane).append("svg"),
     // Initially hide the hexmap, we'll have a button to show it
     g.style("display", "none").attr("id", "hexmap")
     
-    
+/*    
 d3.json("data/oakland_victims.geojson", function(collection){    
     makeHexBin(collection);
 
@@ -654,7 +654,9 @@ d3.json("data/oakland_victims.geojson", function(collection){
             }      
     }	    
 
-})   
+})
+*/
+
 })
 
 
